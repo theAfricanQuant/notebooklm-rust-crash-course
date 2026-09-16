@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rust compile cycle — quick reference</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body><main>
+  <p class="eyebrow">Rust Crash Course · Quick reference</p>
+  <h1>Compile cycle</h1>
+  <p class="lede">A Rust program starts as readable source code. The compiler checks it and produces a binary you run on the target platform.</p>
+  <div class="flow" aria-label="Rust compile cycle">
+    <div><small>1 · write</small><strong><code>hello.rs</code></strong><span>Rust source code</span></div>
+    <div><small>2 · compile</small><strong><code>rustc hello.rs</code></strong><span>Checks and produces a binary</span></div>
+    <div><small>3 · run</small><strong><code>./hello</code></strong><span>Executes the compiled program</span></div>
+  </div>
+  <div class="callout"><strong>Default target:</strong> a binary built normally runs for the platform it was built for. Producing a binary for another platform is called cross-compilation.</div>
+  <p class="footer">Return to <a href="../lessons/0001-rust-introduction.html">Day 1: Introduction</a>.</p>
+</main></body>
+</html>

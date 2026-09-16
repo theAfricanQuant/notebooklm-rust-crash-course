@@ -1,0 +1,7 @@
+# Rust build output
+/target/
+/practice/**/hello
+/practice/**/*.exe
+
+# Operating-system clutter
+.DS_Store

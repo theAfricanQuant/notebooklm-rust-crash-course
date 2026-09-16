@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Day 1 of the Rust Crash Course: compile and run your first Rust binary.">
+  <title>Day 1 — Rust introduction</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="eyebrow">Rust Crash Course · Day 1 · Source 03</p>
+  <h1>Make a Rust program exist.</h1>
+  <p class="lede">Today you will write one tiny program, compile it into a binary, and run that binary. That loop is the foundation for every later Rust lesson.</p>
+  <div class="meta"><span>20–30 minutes</span><span>One tangible win</span><span>Introduction</span></div>
+
+  <section class="card">
+    <h2>What you are learning</h2>
+    <p>Your downloaded chapter introduces Rust as a compiled, statically typed language. For today, keep one distinction in view: your <em>source file</em> is for humans; the compiled <em>binary</em> is what your operating system runs.</p>
+    <p><strong>Course source:</strong> Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial playlist</a> (Tutorial #1: Introduction To Rust Programming). <strong>Optional extra:</strong> the official <a href="https://doc.rust-lang.org/book/ch01-00-getting-started.html">Getting Started chapter of The Rust Programming Language</a> if you want more detail after completing today’s practice.</p>
+  </section>
+
+  <section>
+    <h2>Hold this model</h2>
+    <div class="flow" aria-label="From Rust source to running program">
+      <div><small>you write</small><strong><code>hello.rs</code></strong><span>Readable Rust source</span></div>
+      <div><small>Rust checks</small><strong><code>rustc</code></strong><span>Compiler</span></div>
+      <div><small>your OS runs</small><strong><code>hello</code></strong><span>Native binary</span></div>
+    </div>
+    <p>Keep the <a href="../reference/day-01-compile-cycle.html">compile-cycle reference</a> nearby. A normal build produces a binary for its target platform; it is not automatically a universal file for every operating system.</p>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Zed Lab · use this every day</p>
+    <h2>Connect your Rust practice to Zed</h2>
+    <ol>
+      <li>Open your Rust practice folder in Zed with <strong>File → Open</strong>.</li>
+      <li>Press <kbd>Ctrl</kbd> + <kbd>`</kbd> to open the integrated terminal at the bottom.</li>
+      <li>Run <code>pwd</code>, then update the Rust toolchain once:</li>
+    </ol>
+    <pre><code>rustup update
+rustc --version
+cargo --version</code></pre>
+    <ol start="4">
+      <li>Your editor and terminal now work in the same folder with an up-to-date Rust toolchain.</li>
+    </ol>
+    <p><code>rustup update</code> updates installed Rust toolchains. Run it now, and occasionally later—not before every lesson. Zed’s terminal uses your system shell and normally starts in the folder you opened. If Rust works in an external terminal but not in Zed, open the same folder from that working shell with <code>zed .</code>; Zed will inherit its environment. For every daily lesson, use this same loop: open the practice folder → read the next downloaded chapter → change code → save → run the listed command in Zed’s terminal → inspect the result.</p>
+  </section>
+
+  <section class="practice">
+    <p class="eyebrow">Do this now</p>
+    <h2>Build “Hello, Rust!”</h2>
+    <ol>
+      <li>In Zed’s integrated terminal, create a dedicated Day 1 practice folder and the Rust source file:</li>
+    </ol>
+    <pre><code>mkdir -p practice/day-01-hello
+cd practice/day-01-hello
+touch hello.rs
+zed .</code></pre>
+    <p><code>touch hello.rs</code> creates an empty file. <code>zed .</code> opens this exact folder as a Zed project; select <code>hello.rs</code> in the file panel, then paste the code below. If the <code>zed</code> command is not available, use <strong>File → Open</strong> in Zed and choose the <code>practice/day-01-hello</code> folder instead.</p>
+    <ol start="2">
+      <li>Confirm the toolchain from that same Zed terminal:</li>
+    </ol>
+    <pre><code>rustc --version</code></pre>
+    <ol start="3">
+      <li>Put this code into <code>hello.rs</code>, then save it:</li>
+    </ol>
+    <pre><code>fn main() {
+    println!("Hello, Rust!");
+}</code></pre>
+    <ol start="4">
+      <li>Compile it from Zed’s terminal:</li>
+    </ol>
+    <pre><code>rustc hello.rs</code></pre>
+    <ol start="5">
+      <li>Run the newly created binary:</li>
+    </ol>
+    <pre><code># Linux / macOS
+./hello
+
+# Windows PowerShell
+.\hello.exe</code></pre>
+    <p>You should see <code>Hello, Rust!</code>. If <code>rustc</code> is missing, pause here and use the official installation instructions linked above; do not try to patch around a missing toolchain.</p>
+  </section>
+
+  <section class="callout">
+    <p class="eyebrow">Common rookie mistake · caught and fixed</p>
+    <h2>“But I can see <code>main</code> in Zed!”</h2>
+    <p>The compiler only reads the version of <code>hello.rs</code> saved on disk. An editor can show newer text that is still only in its unsaved buffer. That is why the first compile reported <code>main function not found</code>: the saved file was empty or older.</p>
+    <ol>
+      <li>Write or change the code in Zed.</li>
+      <li><strong>Save with <code>Ctrl+S</code>.</strong></li>
+      <li>Run <code>rustc hello.rs</code> again in Zed’s terminal.</li>
+      <li>Run <code>./hello</code>.</li>
+    </ol>
+    <p>This is not a Rust syntax problem; it is the normal edit → save → compile loop. Your first error and successful rerun are a real example:</p>
+    <figure class="lesson-shot">
+      <img src="../assets/day-01-first-success.png" alt="Zed showing hello.rs, the earlier main function not found error, a rerun of rustc hello.rs, and the successful Hello, Rust output.">
+      <figcaption>Your Day 1 result: save the file, compile it, then run the binary.</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Tooling clarification · extra context</p>
+    <h2><code>rustc</code> or Cargo?</h2>
+    <p><code>rustc</code> is the compiler itself. Today’s standalone <code>hello.rs</code> uses <code>rustc hello.rs</code>, which produces a binary in the same folder. Use this path today because it makes the compile cycle visible.</p>
+    <p>Cargo is Rust’s project manager and build tool. Inside a folder that contains <code>Cargo.toml</code>, <code>cargo run</code> invokes the compiler, then runs the result. Cargo also manages dependencies, standard project folders, testing, formatting, and the <code>target/</code> build directory.</p>
+    <div class="callout"><strong>Rule of thumb:</strong> one loose learning file → <code>rustc hello.rs</code>. A real project with <code>Cargo.toml</code> → <code>cargo run</code>. Day 2 will make the Cargo workflow concrete.</div>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Python bridge · optional mental model</p>
+    <h2>Is Cargo like <code>uv</code>?</h2>
+    <p><strong>Yes, partly.</strong> Cargo is closest to <code>uv</code> in <em>project mode</em>: it knows the project, reads its dependency manifest, keeps a lockfile, builds what is needed, and runs the project. But Cargo is <strong>not</strong> a Python virtual-environment manager.</p>
+    <div class="mapping" aria-label="Python uv and Rust Cargo comparison">
+      <div><small>Python + uv</small><strong><code>uv init</code></strong><span>Create a project</span></div>
+      <div><small>Rust</small><strong><code>cargo new</code></strong><span>Create a Cargo project</span></div>
+      <div><small>Python + uv</small><strong><code>pyproject.toml</code></strong><span>Project metadata and declared dependencies</span></div>
+      <div><small>Rust</small><strong><code>Cargo.toml</code></strong><span>Project metadata and declared dependencies</span></div>
+      <div><small>Python + uv</small><strong><code>uv.lock</code></strong><span>Exact resolved dependency versions</span></div>
+      <div><small>Rust</small><strong><code>Cargo.lock</code></strong><span>Exact resolved dependency versions</span></div>
+      <div><small>Python + uv</small><strong><code>uv run …</code></strong><span>Run a command in the project’s environment</span></div>
+      <div><small>Rust</small><strong><code>cargo run</code></strong><span>Build then run the project’s binary</span></div>
+    </div>
+    <h3>The important difference: no Rust <code>.venv</code></h3>
+    <p><code>uv venv</code> creates an isolated Python environment containing installed packages, which you may activate. Cargo does not create or activate an equivalent environment. It reads <code>Cargo.toml</code>, resolves the crates, compiles them for the project, and writes compiled artefacts to <code>target/</code>. Think of <code>target/</code> as build output—not as a Rust <code>.venv</code>.</p>
+    <p>The closest Rust companion to <code>uv python install</code> is <code>rustup toolchain install stable</code>: <code>rustup</code> manages Rust toolchains, while Cargo manages each Rust project.</p>
+    <p><strong>For Day 1:</strong> keep using <code>rustc hello.rs</code> so you see compilation directly. Once we create a real package in the downloaded course sequence, switch to Cargo and use <code>cargo run</code> in Zed’s terminal.</p>
+    <p class="footer">Extra context only: <a href="https://doc.rust-lang.org/cargo/guide/why-cargo-exists.html">Cargo’s official explanation</a> · <a href="https://docs.astral.sh/uv/concepts/projects/">uv Projects</a> · <a href="https://docs.astral.sh/uv/pip/environments/">uv environments</a>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Read the three moving parts</h2>
+    <pre><code>fn main() {
+    println!("Hello, Rust!");
+}</code></pre>
+    <ul>
+      <li><code>fn main()</code> declares the entry-point function—where the executable begins.</li>
+      <li><code>println!</code> writes a line to standard output. The <code>!</code> tells you this is a macro invocation, not an ordinary function call.</li>
+      <li><code>"Hello, Rust!"</code> is a string literal: text written directly in source code.</li>
+    </ul>
+    <div class="callout">
+      <h3>A tiny macro preview — we will return to this later</h3>
+      <p>A function is like a little machine you give a value to while the program runs. A macro is like a helper that helps Rust build the instructions <em>before</em> the program runs. The <code>println!</code> macro can understand several patterns—plain text, text with a number, or named values—and generate the right printing code.</p>
+      <pre><code>println!("Hello!");
+println!("Score: {}", 10);
+println!("{name} has {count} apples", name = "Sam", count = 3);</code></pre>
+      <p>Python has no direct Rust-style macro system; Python functions and <code>*args</code> often handle flexible inputs at runtime instead. You do <strong>not</strong> need to master macros today: just remember that the <code>!</code> is meaningful, then keep using <code>println!</code> exactly as written.</p>
+    </div>
+  </section>
+
+  <section class="quiz" aria-labelledby="quiz-title">
+    <p class="eyebrow">Retrieval check</p>
+    <h2 id="quiz-title">No peeking: what does <code>rustc hello.rs</code> produce?</h2>
+    <button type="button" data-answer="false">A source file</button>
+    <button type="button" data-answer="true">A binary file</button>
+    <button type="button" data-answer="false">A database file</button>
+    <p class="feedback" aria-live="polite"></p>
+  </section>
+
+  <section class="practice checklist">
+    <p class="eyebrow">Finish line</p>
+    <h2>Before tomorrow</h2>
+    <label><input type="checkbox"> I ran <code>rustc --version</code>.</label>
+    <label><input type="checkbox"> I saved <code>hello.rs</code>, then compiled and ran it.</label>
+    <label><input type="checkbox"> I can explain: source code is compiled into the binary the OS runs.</label>
+    <p><strong>Reply to me with:</strong> the output you got and one sentence answering “what is the difference between <code>hello.rs</code> and <code>hello</code>?” I’ll use that to calibrate Day 2: Rust tools and Cargo.</p>
+  </section>
+
+  <p class="footer">Course source: Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>. The Rust Book link above is optional enrichment only. Ask me anything that feels unclear—especially terminal errors; paste the exact message.</p>
+</main>
+<script>
+  document.querySelectorAll('[data-answer]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const feedback = button.parentElement.querySelector('.feedback');
+      const correct = button.dataset.answer === 'true';
+      feedback.textContent = correct
+        ? 'Correct. The compiler turns source into a binary you can execute.'
+        : 'Not quite. Read the three-box model, then try again.';
+      feedback.className = `feedback ${correct ? 'correct' : 'incorrect'}`;
+    });
+  });
+</script>
+</body>
+</html>
