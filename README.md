@@ -92,13 +92,17 @@ On Windows PowerShell, run the produced file with:
 
 ### The first common error
 
-If Rust says it cannot find `main`, but you can see `fn main()` in Zed, save first:
+If Rust says it cannot find `main`, but you can see `fn main()` in Zed, your editor buffer is probably unsaved. The first screenshot below shows that exact situation: the code is visible in Zed, but `rustc` still reads the older on-disk file.
+
+![Zed showing an unsaved hello.rs buffer and the main function not found compiler error](assets/day-01-unsaved-buffer-error.png)
+
+Save first, then compile and run again:
 
 ```text
 Ctrl+S → rustc hello.rs → ./hello
 ```
 
-The compiler reads the version of the file saved on disk, not unsaved text still held by the editor.
+The second screenshot at the top of this README shows the successful rerun. The compiler reads the version of the file saved on disk, not unsaved text still held by the editor.
 
 ## `rustc`, Cargo, `rustup`, and `uv`
 

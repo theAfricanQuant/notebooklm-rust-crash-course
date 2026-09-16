@@ -93,10 +93,14 @@ zed .</code></pre>
       <li>Run <code>rustc hello.rs</code> again in Zed’s terminal.</li>
       <li>Run <code>./hello</code>.</li>
     </ol>
-    <p>This is not a Rust syntax problem; it is the normal edit → save → compile loop. Your first error and successful rerun are a real example:</p>
+    <p>This is not a Rust syntax problem; it is the normal edit → save → compile loop. Your Day 1 screenshots show both sides of the loop:</p>
     <figure class="lesson-shot">
-      <img src="../assets/day-01-first-success.png" alt="Zed showing hello.rs, the earlier main function not found error, a rerun of rustc hello.rs, and the successful Hello, Rust output.">
-      <figcaption>Your Day 1 result: save the file, compile it, then run the binary.</figcaption>
+      <img src="../assets/day-01-unsaved-buffer-error.png" alt="Zed showing the unsaved hello.rs code buffer and a Rust compiler error saying main function not found.">
+      <figcaption>Before saving: the new <code>main</code> is visible in Zed, but Rust still sees the previous on-disk file.</figcaption>
+    </figure>
+    <figure class="lesson-shot">
+      <img src="../assets/day-01-first-success.png" alt="Zed showing hello.rs, a successful rerun of rustc hello.rs, and the Hello, Rust output.">
+      <figcaption>After <code>Ctrl+S</code>: compile again, then run the binary successfully.</figcaption>
     </figure>
   </section>
 
