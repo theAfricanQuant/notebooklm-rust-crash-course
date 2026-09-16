@@ -36,7 +36,7 @@ Every lesson must contain:
 - A finish line that says exactly what evidence the learner should return
 - Optional extras clearly separated from the source chapter
 
-Write semantic HTML, not Markdown inside HTML. Keep each page short enough to complete in one sitting. Preserve the course’s clean editorial visual system by reusing `assets/course.css`; do not duplicate or replace its palette with generic styling. Make new diagrams with ordinary accessible HTML/SVG only when they improve understanding, and keep all labels inside their bounds.
+Write semantic HTML, not Markdown inside HTML. Keep each page short enough to complete in one sitting. Every page must be mobile-friendly: use the shared responsive CSS, ensure code blocks scroll rather than overflow, collapse multi-column layouts on narrow screens, and keep text, controls, images, and diagram labels within their containers. Preserve the course’s clean editorial visual system by reusing `assets/course.css`; do not duplicate or replace its palette with generic styling. Make new diagrams with ordinary accessible HTML/SVG only when they improve understanding, and keep all labels inside their bounds.
 
 ## Learning state
 
