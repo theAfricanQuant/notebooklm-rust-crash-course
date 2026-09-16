@@ -45,3 +45,7 @@ Create a new `learning-records/NNNN-name.md` only after the learner demonstrates
 ## Completion check
 
 Before handing off, verify that the new page opens, links resolve, the Zed Lab command matches the lesson, the attribution is present, and all practice instructions lead to an observable result.
+
+## Publish each completed class
+
+After a requested lesson or lesson revision is complete, run `git status` and review the changed files. Commit only the intended course artifacts with a descriptive message, then push the current `main` branch to `origin`. Do this after the class is finished, not mid-lesson; preserve generated Rust binaries and other ignored build output outside commits.
