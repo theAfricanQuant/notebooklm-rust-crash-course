@@ -32,7 +32,7 @@ The original course is Tech With Tim’s [Rust Programming Tutorial playlist](ht
 | Course export | Topic | Lesson status |
 | --- | --- | --- |
 | `03-introduction.md` | Introduction and first program | Day 1 complete |
-| `04-rust-tools.md` | Cargo and Rust tools | Next |
+| `04-rust-tools.md` | Cargo and Rust tools | Ready to start |
 | `05-variables-constants-shadowing.md` | Variables, constants, shadowing | Planned |
 | `06-data-types.md` | Data types | Planned |
 | `07-console-input.md` | Console input | Planned |
