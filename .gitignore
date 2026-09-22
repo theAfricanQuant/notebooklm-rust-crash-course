@@ -2,6 +2,7 @@
 /target/
 /practice/**/hello
 /practice/**/*.exe
+/practice/**/target/
 
 # Operating-system clutter
 .DS_Store
