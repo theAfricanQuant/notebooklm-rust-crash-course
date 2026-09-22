@@ -16,8 +16,26 @@
 
   <section class="card">
     <h2>Why today changes the workflow</h2>
-    <p>Yesterday, <code>rustc hello.rs</code> compiled one loose file. That is useful for seeing the raw compile cycle. Real programs need a home for source files, dependency information, and build output. Cargo gives a Rust project that home and invokes the compiler for you.</p>
+    <p>Yesterday, <code>rustc hello.rs</code> compiled one loose file. That was deliberately simple: it let you see the raw Rust compile cycle. But as soon as a program has more than one file or needs a library written by someone else, you need one place that knows how the project is arranged.</p>
+    <p><strong>Cargo is that project manager.</strong> It remembers the project’s dependencies, asks Rust’s compiler to build the code, runs the result, and follows standard Rust folder conventions. You do not use Cargo because the first program is too hard; you use it so the next hundred programs stay organised.</p>
     <p><strong>Course source:</strong> Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>.</p>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Python bridge</p>
+    <h2>Cargo is closest to <code>uv</code>, not to Python itself</h2>
+    <p>In Python, you normally use <code>python</code> to run a file and a tool such as <code>uv</code> to create a project, install packages, and run commands in that project. Rust separates those jobs too:</p>
+    <div class="mapping" aria-label="Python and Rust tooling comparison">
+      <div><small>Python project tool</small><strong>uv</strong><span>Creates a project and manages dependencies.</span></div>
+      <div><small>Rust project tool</small><strong>Cargo</strong><span>Creates a project, manages dependencies, builds, checks, runs, tests, and formats it.</span></div>
+      <div><small>Project instructions</small><strong>pyproject.toml</strong><span>The project’s declared metadata and dependencies.</span></div>
+      <div><small>Project instructions</small><strong>Cargo.toml</strong><span>The Rust project’s declared metadata and dependencies.</span></div>
+      <div><small>Exact dependency record</small><strong>uv.lock</strong><span>Records the chosen package versions.</span></div>
+      <div><small>Exact dependency record</small><strong>Cargo.lock</strong><span>Records the chosen Rust crate versions.</span></div>
+      <div><small>Run project code</small><strong>uv run python …</strong><span>Runs Python in the project environment.</span></div>
+      <div><small>Build and run project code</small><strong>cargo run</strong><span>Compiles Rust when needed, then runs the result.</span></div>
+    </div>
+    <p>One important difference: Rust must compile before it runs. Cargo calls <code>rustc</code>, the compiler, for you. Think of Cargo as the conductor and <code>rustc</code> as the instrument doing the actual compiling. You will almost always use Cargo for a real Rust project.</p>
   </section>
 
   <section class="card">
@@ -27,7 +45,7 @@
       <div><small>Your code</small><strong>src/main.rs</strong><span>The program entry point: it contains <code>fn main()</code>.</span></div>
       <div><small>Build output</small><strong>target/</strong><span>Created by Cargo. It holds compiled files and should stay out of Git.</span></div>
     </div>
-    <p><code>Cargo.lock</code> will also appear after the first build. Cargo maintains it to record exact dependency versions; leave it to Cargo.</p>
+    <p><code>Cargo.lock</code> will also appear after the first build. Cargo maintains it to record exact dependency versions; leave it to Cargo. The <code>target/</code> folder is build output, not the equivalent of Python’s <code>.venv</code>.</p>
   </section>
 
   <section class="card">
