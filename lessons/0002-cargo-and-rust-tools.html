@@ -103,7 +103,10 @@
     <p>You do not need these to complete the main task. Try them when you feel ready:</p>
     <pre><code>cargo fmt
 cargo check</code></pre>
-    <p><code>cargo fmt</code> tidies the formatting of the project’s Rust files. <code>cargo check</code> asks Cargo whether your code can compile, without making the final executable. They are useful habits, not hurdles to clear before your first successful run.</p>
+    <h3>What happens when you run <code>cargo fmt</code>?</h3>
+    <p>Think of it as Rust’s version of running <code>ruff format .</code> or <code>black .</code> in a Python project. Cargo reads the project’s <code>Cargo.toml</code>, finds the Rust source files it knows belong to the project, and hands them to the installed <code>rustfmt</code> formatter. Rustfmt then rewrites only presentation details—indentation, spacing, line breaks, and wrapping—to Rust’s standard style.</p>
+    <p><strong>It does not compile or run your program, and it does not change what your program means.</strong> It only makes the code look consistent. To ask whether formatting would make any changes without editing the files, use <code>cargo fmt -- --check</code>.</p>
+    <p><code>cargo check</code> is different: it asks Cargo whether your code can compile, without making the final executable. Both are useful habits, not hurdles to clear before your first successful run.</p>
   </section>
 
   <section class="card">
