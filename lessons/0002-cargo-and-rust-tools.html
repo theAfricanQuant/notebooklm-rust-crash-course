@@ -43,9 +43,23 @@
     <div class="flow" aria-label="A Cargo project has three important parts">
       <div><small>Instructions</small><strong>Cargo.toml</strong><span>The package name, version, Rust edition, and future dependencies.</span></div>
       <div><small>Your code</small><strong>src/main.rs</strong><span>The program entry point: it contains <code>fn main()</code>.</span></div>
-      <div><small>Build output</small><strong>target/</strong><span>Created by Cargo. It holds compiled files and should stay out of Git.</span></div>
+      <div><small>Build output</small><strong>target/</strong><span>Created when Cargo builds. It holds compiled files and should stay out of Git.</span></div>
     </div>
     <p><code>Cargo.lock</code> will also appear after the first build. Cargo maintains it to record exact dependency versions; leave it to Cargo. The <code>target/</code> folder is build output, not the equivalent of Python’s <code>.venv</code>.</p>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Pause &amp; inspect</p>
+    <h2>What Cargo made for you</h2>
+    <p>When you run <code>cargo new</code>, Cargo creates a ready-to-use project skeleton. At first, focus on just these two things:</p>
+    <div class="mapping" aria-label="Files created by Cargo">
+      <div><small>Project instructions</small><strong>Cargo.toml</strong><span>The project’s name, Rust edition, and future dependency list—closest to Python’s <code>pyproject.toml</code>.</span></div>
+      <div><small>Starter program</small><strong>src/main.rs</strong><span>Your executable’s source code. Its <code>fn main()</code> function is where the program begins.</span></div>
+      <div><small>After the first build</small><strong>Cargo.lock</strong><span>Cargo’s record of the exact dependency versions selected—closest to <code>uv.lock</code>. Cargo maintains it.</span></div>
+      <div><small>After the first build</small><strong>target/</strong><span>Generated compiled output and build cache. Keep it out of Git; Cargo can recreate it at any time.</span></div>
+    </div>
+    <h3>Why does the file end in <code>.toml</code>?</h3>
+    <p>TOML means <strong>Tom’s Obvious Minimal Language</strong>: a small, human-readable configuration-file format. “Tom” is <strong>Tom Preston-Werner</strong>, who created the format; he is not part of Rust or Cargo. Cargo uses TOML because it is easy for people to read and edit.</p>
   </section>
 
   <section class="card">
