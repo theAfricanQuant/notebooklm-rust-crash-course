@@ -35,6 +35,8 @@
       <div><small>Run project code</small><strong>uv run python …</strong><span>Runs Python in the project environment.</span></div>
       <div><small>Build and run project code</small><strong>cargo run</strong><span>Compiles Rust when needed, then runs the result.</span></div>
     </div>
+    <p><strong>So: yes, broadly they have the same job.</strong> <code>uv init</code> creates <code>pyproject.toml</code> (note the spelling: <code>.toml</code>), just as <code>cargo new</code> creates <code>Cargo.toml</code>. Each is that ecosystem’s project manifest: a home for project metadata and dependencies.</p>
+    <p>They are not interchangeable, though. Both happen to use the TOML format, but <code>pyproject.toml</code> follows Python’s packaging conventions and can hold settings for many Python tools; <code>Cargo.toml</code> follows Cargo’s Rust-specific conventions and tells Cargo how to build the package.</p>
     <p>One important difference: Rust must compile before it runs. Cargo calls <code>rustc</code>, the compiler, for you. Think of Cargo as the conductor and <code>rustc</code> as the instrument doing the actual compiling. You will almost always use Cargo for a real Rust project.</p>
   </section>
 
