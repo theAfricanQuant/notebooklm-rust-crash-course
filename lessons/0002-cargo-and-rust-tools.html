@@ -32,30 +32,56 @@
 
   <section class="card">
     <p class="eyebrow">Zed Lab · use this every day</p>
-    <h2>Create and run your first Cargo project</h2>
+    <h2>First, find your place</h2>
+    <p>Today has a few new ideas. We will take them one at a time. <strong>Do not run the later commands until the earlier checkpoint makes sense.</strong></p>
     <ol>
       <li>Open <code>notebooklm-rust-crash-course</code> in Zed.</li>
       <li>Press <kbd>Ctrl</kbd> + <kbd>`</kbd> to open Zed’s integrated terminal.</li>
-      <li>Run the commands below exactly. The <code>--vcs none</code> option keeps this practice project inside the course repository instead of making a nested Git repository.</li>
+      <li>Type only this command, then press Enter:</li>
     </ol>
-    <pre><code>cd practice
-cargo new --vcs none cargo-greeting
-cd cargo-greeting
-cargo run</code></pre>
-    <p>Success is the default <code>Hello, world!</code> message and a new <code>cargo-greeting/</code> folder containing <code>Cargo.toml</code> and <code>src/main.rs</code>.</p>
+    <pre><code>pwd</code></pre>
+    <p><code>pwd</code> means “print working directory.” It tells you which folder the terminal is currently using. You should see a path ending in <code>notebooklm-rust-crash-course</code>. If you do, you are in the right place. Pause here.</p>
   </section>
 
   <section class="practice">
-    <p class="eyebrow">Do this now</p>
-    <h2>Make the greeting yours</h2>
-    <p>Open <code>practice/cargo-greeting/src/main.rs</code> in Zed. Replace its contents with this, save the file, and run the three commands from the project folder:</p>
+    <p class="eyebrow">Checkpoint 1 · make the project</p>
+    <h2>Ask Cargo to create the starter folder</h2>
+    <p>Once <code>pwd</code> shows the course folder, type the next command:</p>
+    <pre><code>cd practice</code></pre>
+    <p><code>cd</code> means “change directory.” This moves the terminal into the course’s <code>practice</code> folder. Check it with <code>pwd</code> if you like; the path should now end in <code>/practice</code>.</p>
+    <p>Now create the project:</p>
+    <pre><code>cargo new --vcs none cargo-greeting</code></pre>
+    <p>Read it as: “Cargo, make a new project named <code>cargo-greeting</code>.” The unusual-looking <code>--vcs none</code> simply prevents Cargo from creating a second Git repository inside this course. You do not need to memorise it.</p>
+    <p><strong>Success:</strong> the terminal says it created a binary application called <code>cargo-greeting</code>. Pause and look in Zed’s file list: you should now see a new <code>cargo-greeting</code> folder.</p>
+  </section>
+
+  <section class="practice">
+    <p class="eyebrow">Checkpoint 2 · run the starter program</p>
+    <h2>Enter the project, then run it</h2>
+    <p>Only after the new folder exists, type:</p>
+    <pre><code>cd cargo-greeting</code></pre>
+    <p>Now you are inside the project. This is where <code>Cargo.toml</code> and <code>src/main.rs</code> live. Run the program with:</p>
+    <pre><code>cargo run</code></pre>
+    <p>Cargo compiles the starter code and then runs it. Your one goal for this checkpoint is seeing <code>Hello, world!</code>. Stop there when it appears.</p>
+  </section>
+
+  <section class="practice">
+    <p class="eyebrow">Checkpoint 3 · make one change</p>
+    <h2>Change the greeting</h2>
+    <p>Open <code>src/main.rs</code> in Zed. Change only the words between the quotation marks, save the file, then run <code>cargo run</code> again.</p>
     <pre><code>fn main() {
     println!("Hello from Siseng's Cargo project!");
 }</code></pre>
+    <p><strong>Success:</strong> the terminal prints your own greeting. You have now edited, compiled, and run a real Cargo project.</p>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Only after the greeting works</p>
+    <h2>Two helpful commands for later</h2>
+    <p>You do not need these to complete the main task. Try them when you feel ready:</p>
     <pre><code>cargo fmt
-cargo check
-cargo run</code></pre>
-    <p><code>cargo fmt</code> formats the Rust files in the project (it uses <code>rustfmt</code>). <code>cargo check</code> type-checks the code without producing the final executable. <code>cargo run</code> builds when needed and runs the result. Your terminal should print your new greeting.</p>
+cargo check</code></pre>
+    <p><code>cargo fmt</code> tidies the formatting of the project’s Rust files. <code>cargo check</code> asks Cargo whether your code can compile, without making the final executable. They are useful habits, not hurdles to clear before your first successful run.</p>
   </section>
 
   <section class="card">
@@ -84,8 +110,8 @@ cargo run</code></pre>
     <h2>Before tomorrow</h2>
     <label><input type="checkbox"> I created <code>practice/cargo-greeting</code> with Cargo.</label>
     <label><input type="checkbox"> I changed and saved <code>src/main.rs</code>.</label>
-    <label><input type="checkbox"> I ran <code>cargo fmt</code>, <code>cargo check</code>, and <code>cargo run</code>.</label>
-    <p><strong>Reply with:</strong> the final terminal output from <code>cargo run</code>, plus one sentence explaining why <code>cargo check</code> is useful.</p>
+    <label><input type="checkbox"> I ran <code>cargo run</code> and saw my own greeting.</label>
+    <p><strong>Reply with:</strong> the final terminal output from <code>cargo run</code>. That is enough to finish Day 2; the formatting and checking commands can wait until they feel useful.</p>
   </section>
 
   <section class="callout">
