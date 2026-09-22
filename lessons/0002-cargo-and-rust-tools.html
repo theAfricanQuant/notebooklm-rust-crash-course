@@ -68,16 +68,16 @@
     <pre><code>cd practice</code></pre>
     <p><code>cd</code> means “change directory.” This moves the terminal into the course’s <code>practice</code> folder. Check it with <code>pwd</code> if you like; the path should now end in <code>/practice</code>.</p>
     <p>Now create the project:</p>
-    <pre><code>cargo new --vcs none cargo-greeting</code></pre>
-    <p>Read it as: “Cargo, make a new project named <code>cargo-greeting</code>.” The unusual-looking <code>--vcs none</code> simply prevents Cargo from creating a second Git repository inside this course. You do not need to memorise it.</p>
-    <p><strong>Success:</strong> the terminal says it created a binary application called <code>cargo-greeting</code>. Pause and look in Zed’s file list: you should now see a new <code>cargo-greeting</code> folder.</p>
+    <pre><code>cargo new --vcs none day-02-cargo-greeting</code></pre>
+    <p>Read it as: “Cargo, make a new project named <code>day-02-cargo-greeting</code>.” The <code>day-02</code> prefix keeps this practice folder aligned with Day 1’s <code>day-01-hello</code> folder. The unusual-looking <code>--vcs none</code> simply prevents Cargo from creating a second Git repository inside this course. You do not need to memorise it.</p>
+    <p><strong>Success:</strong> the terminal says it created a binary application called <code>day-02-cargo-greeting</code>. Pause and look in Zed’s file list: you should now see a new folder with that name.</p>
   </section>
 
   <section class="practice">
     <p class="eyebrow">Checkpoint 2 · run the starter program</p>
     <h2>Enter the project, then run it</h2>
     <p>Only after the new folder exists, type:</p>
-    <pre><code>cd cargo-greeting</code></pre>
+    <pre><code>cd day-02-cargo-greeting</code></pre>
     <p>Now you are inside the project. This is where <code>Cargo.toml</code> and <code>src/main.rs</code> live. Run the program with:</p>
     <pre><code>cargo run</code></pre>
     <p>Cargo compiles the starter code and then runs it. Your one goal for this checkpoint is seeing <code>Hello, world!</code>. Stop there when it appears.</p>
@@ -126,7 +126,7 @@ cargo check</code></pre>
   <section class="practice checklist">
     <p class="eyebrow">Finish line</p>
     <h2>Before tomorrow</h2>
-    <label><input type="checkbox"> I created <code>practice/cargo-greeting</code> with Cargo.</label>
+    <label><input type="checkbox"> I created <code>practice/day-02-cargo-greeting</code> with Cargo.</label>
     <label><input type="checkbox"> I changed and saved <code>src/main.rs</code>.</label>
     <label><input type="checkbox"> I ran <code>cargo run</code> and saw my own greeting.</label>
     <p><strong>Reply with:</strong> the final terminal output from <code>cargo run</code>. That is enough to finish Day 2; the formatting and checking commands can wait until they feel useful.</p>
