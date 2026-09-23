@@ -52,6 +52,25 @@ deliveries = 4;</code></pre>
   </section>
 
   <section class="card">
+    <h2>Scope: where a name exists</h2>
+    <p>A <strong>scope</strong> is the part of the program where a name can be used. Curly braces <code>{ ... }</code> create a nested, inner scope. An inner scope can use names from its outer scope, but a name created inside disappears when Rust reaches the closing brace.</p>
+    <pre><code>let x = 5;              // outer scope: x is 5
+
+{
+    let x = 2;          // inner scope: this is a new x
+    println!("{x}");    // prints 2
+}
+
+println!("{x}");        // prints 5 again</code></pre>
+    <div class="flow">
+      <div><small>Outside braces</small><strong>Outer <code>x</code></strong><span><code>x</code> is 5 and remains available throughout <code>main</code>.</span></div>
+      <div><small>Inside braces</small><strong>Inner <code>x</code></strong><span>A new <code>x</code> is 2. It shadows the outer name only here.</span></div>
+      <div><small>After <code>}</code></small><strong>Back to outer <code>x</code></strong><span>The inner binding is gone, so Rust sees the earlier <code>x</code> of 5 again.</span></div>
+    </div>
+    <div class="callout"><strong>Important:</strong> the inner <code>let x = 2;</code> does not alter the outer <code>x</code>. It creates a separate binding that lasts only within those braces. This is why your program printed 2 inside the block and 5 afterward.</div>
+  </section>
+
+  <section class="card">
     <p class="eyebrow">Zed Lab · use this every day</p>
     <h2>Create today’s project yourself</h2>
     <ol>

@@ -10,4 +10,4 @@ The learner then removed `mut` from `let mut deliveries = 3;`. Before running Ca
 
 ## Demonstrated understanding
 
-The learner noticed that `let x = x + 1;` and `x = x + 1;` look similar but asks why one is permitted. The next retrieval should confirm the distinction: the former creates a new binding by shadowing; the latter reassigns the existing binding and therefore requires `mut`.
+The learner noticed that `let x = x + 1;` and `x = x + 1;` look similar but asks why one is permitted. The next retrieval should confirm the distinction: the former creates a new binding by shadowing; the latter reassigns the existing binding and therefore requires `mut`. A Day 3 clarification now explicitly teaches scope: the inner `x = 2` exists only inside its braces and does not alter the outer `x = 5`.
