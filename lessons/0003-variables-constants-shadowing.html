@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rust Crash Course — Day 3: variables, constants, and shadowing.">
+  <title>Day 3 — Variables, constants, and shadowing</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="eyebrow">Rust Crash Course · Day 3 · Source 05</p>
+  <h1>Keep a value. Change it on purpose.</h1>
+  <p class="lede">Build a tiny Cargo program that shows Rust’s default immutability, deliberate mutation, shadowing, scope, and constants.</p>
+  <div class="meta"><span>35–45 minutes</span><span>One tangible win</span><span>Variables and constants</span></div>
+
+  <section class="card">
+    <h2>What this chapter introduces</h2>
+    <p>In Rust, <code>let x = 4;</code> creates an <strong>immutable binding</strong>: the name <code>x</code> cannot later be assigned a new value. This is Rust’s default because it makes accidental changes easier to spot. Use <code>let mut</code> only when one value truly needs to change. Use <strong>shadowing</strong>—another <code>let</code> with the same name—when you mean to create a new value, possibly even with a new type.</p>
+    <p>A <strong>constant</strong> is different again: it must have an explicit type, uses <code>const</code>, and is conventionally written in <code>UPPER_SNAKE_CASE</code>. Its value cannot change anywhere in the program.</p>
+    <p><strong>Course source:</strong> Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Four ideas, one decision</h2>
+    <div class="mapping">
+      <div><small>Default</small><strong><code>let x = 4;</code></strong><span>Keep <code>x</code> fixed. A later <code>x = 5;</code> is an error.</span></div>
+      <div><small>Changing one value</small><strong><code>let mut x = 4;</code></strong><span>Use this when the same value genuinely changes over time.</span></div>
+      <div><small>New value, same name</small><strong><code>let x = x + 1;</code></strong><span>This is shadowing: a new binding replaces the old one in this scope.</span></div>
+      <div><small>Program-wide fixed fact</small><strong><code>const SECONDS_PER_MINUTE: u32 = 60;</code></strong><span>A constant needs a type and cannot be redefined or reassigned.</span></div>
+    </div>
+    <div class="callout"><strong>Useful rule:</strong> start with <code>let</code>. Add <code>mut</code> only when you need reassignment. Choose shadowing when a later value is conceptually a new version of the earlier one.</div>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Zed Lab · use this every day</p>
+    <h2>Create today’s project yourself</h2>
+    <ol>
+      <li>Open the Rust course folder in Zed.</li>
+      <li>Press <kbd>Ctrl</kbd> + <kbd>`</kbd> to open Zed’s integrated terminal.</li>
+      <li>From the course root, create and enter a fresh project:</li>
+    </ol>
+    <pre><code>cargo new practice/day-03-variables
+cd practice/day-03-variables
+zed .</code></pre>
+    <p>In the Zed window for this project, open <code>src/main.rs</code>. You will type the program below. Save it, then return to Zed’s terminal and run <code>cargo fmt &amp;&amp; cargo run</code>.</p>
+  </section>
+
+  <section class="practice">
+    <p class="eyebrow">Do this now</p>
+    <h2>Make the names tell the truth</h2>
+    <p>Replace the generated <code>main.rs</code> contents with this code. Type it, rather than treating it as a file we made for you. Then change the names or numbers to fit a small task you know—orders, study minutes, or package deliveries.</p>
+    <pre><code>const SECONDS_PER_MINUTE: u32 = 60;
+
+fn main() {
+    let x = 4;
+    println!("outer x starts as {x}");
+
+    let x = x + 1;
+    println!("after shadowing, x is {x}");
+
+    {
+        let x = 2;
+        println!("inside this block, x is {x}");
+    }
+
+    println!("outside the block, x is still {x}");
+
+    let x = "four";
+    println!("a new x can be text: {x}");
+
+    let mut deliveries = 3;
+    deliveries = deliveries + 1;
+    println!("deliveries after one more: {deliveries}");
+
+    println!("seconds in a minute: {SECONDS_PER_MINUTE}");
+}</code></pre>
+    <p><strong>Success looks like:</strong> <code>cargo fmt &amp;&amp; cargo run</code> finishes without warnings and prints that the inner <code>x</code> is <code>2</code>, while the outer <code>x</code> remains <code>5</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Try one compiler-guided experiment</h2>
+    <p>Change <code>let mut deliveries = 3;</code> to <code>let deliveries = 3;</code>. Save and run <code>cargo run</code>. Rust should say you cannot assign twice to an immutable variable. Read the error, then restore <code>mut</code>.</p>
+    <p>Next, change <code>let x = "four";</code> to <code>x = "four";</code>. Notice the difference: without <code>let</code>, this is an attempted reassignment of an existing integer binding, not shadowing. Restore the original code when you have seen the error.</p>
+  </section>
+
+  <section class="quiz">
+    <p class="eyebrow">Retrieval check</p>
+    <h2>Which line creates a new binding instead of changing the old one?</h2>
+    <button type="button" data-answer="no"><code>x = x + 1;</code></button>
+    <button type="button" data-answer="yes"><code>let x = x + 1;</code></button>
+    <button type="button" data-answer="no"><code>const x: u32 = 5;</code></button>
+    <p class="feedback" aria-live="polite"></p>
+  </section>
+
+  <section class="practice checklist">
+    <p class="eyebrow">Finish line</p>
+    <h2>Before tomorrow</h2>
+    <label><input type="checkbox"> I created <code>practice/day-03-variables</code> myself with Cargo.</label>
+    <label><input type="checkbox"> I ran <code>cargo fmt &amp;&amp; cargo run</code> successfully.</label>
+    <label><input type="checkbox"> I caused, read, and fixed the immutable-variable compiler error.</label>
+    <p><strong>Reply with:</strong> your terminal output (no secrets), plus one sentence explaining why <code>let x = x + 1;</code> works without <code>mut</code> but <code>x = x + 1;</code> does not.</p>
+  </section>
+
+  <p class="footer">Course source: Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>. Day 3 uses only the local Chapter 05 teaching path.</p>
+</main>
+<script>
+  document.querySelectorAll('[data-answer]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const feedback = button.parentElement.querySelector('.feedback');
+      feedback.textContent = button.dataset.answer === 'yes'
+        ? 'Correct. A new let statement shadows the earlier binding with a new one.'
+        : 'Not quite. Reassignment has no let; a constant is a different kind of declaration.';
+      feedback.className = `feedback ${button.dataset.answer === 'yes' ? 'correct' : 'incorrect'}`;
+    });
+  });
+</script>
+</body>
+</html>
