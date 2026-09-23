@@ -33,6 +33,25 @@
   </section>
 
   <section class="card">
+    <h2>One name, two different operations</h2>
+    <p>The small word <code>let</code> changes what Rust does. It is reasonable that these lines look similar; Rust deliberately treats them as different operations.</p>
+    <div class="mapping">
+      <div><small>Create a binding</small><strong><code>let x = 20;</code></strong><span>Create a new immutable binding named <code>x</code>. This is the first declaration of the name in this scope.</span></div>
+      <div><small>Reassign a binding</small><strong><code>x = 20;</code></strong><span>Do not create anything. Replace the value of an existing <code>x</code>. This works only if it began as <code>let mut x</code>.</span></div>
+      <div><small>Shadow a binding</small><strong><code>let x = 20;</code> again</strong><span>Create a new binding with the same name. It hides the earlier one; it does not modify it.</span></div>
+      <div><small>Invalid syntax</small><strong><code>let = 20;</code></strong><span>Rust needs a name after <code>let</code>, so this cannot compile.</span></div>
+    </div>
+    <pre><code>// Shadowing: two separate bindings.
+let x = 10;
+let x = 20;
+
+// Mutation: one binding whose value changes.
+let mut deliveries = 3;
+deliveries = 4;</code></pre>
+    <div class="callout"><strong>Read shadowing as temporary names:</strong> <code>let x = 10; let x = x + 1;</code> behaves like <code>x_1 = 10; x_2 = x_1 + 1;</code>. Rust allows both bindings to use the convenient name <code>x</code>.</div>
+  </section>
+
+  <section class="card">
     <p class="eyebrow">Zed Lab · use this every day</p>
     <h2>Create today’s project yourself</h2>
     <ol>
@@ -81,6 +100,14 @@ fn main() {
   <section class="card">
     <h2>Try one compiler-guided experiment</h2>
     <p>Change <code>let mut deliveries = 3;</code> to <code>let deliveries = 3;</code>. Save and run <code>cargo run</code>. Rust should say you cannot assign twice to an immutable variable. Read the error, then restore <code>mut</code>.</p>
+    <figure class="lesson-shot">
+      <img src="../assets/day-03-immutable-warning.png" alt="Zed marks deliveries as an immutable binding and suggests adding mut before Cargo is run.">
+      <figcaption>Learner evidence, Day 3: Zed catches error E0384 before the program runs. The code reassigns <code>deliveries</code>, so Zed suggests <code>let mut deliveries = 3;</code>.</figcaption>
+    </figure>
+    <figure class="lesson-shot">
+      <img src="../assets/day-03-cargo-immutable-error.png" alt="Cargo compiler error E0384 says deliveries cannot be assigned twice because it is immutable and suggests adding mut.">
+      <figcaption>The same evidence after <code>cargo run</code>: Rust identifies the first assignment, the later reassignment, and the exact one-word fix.</figcaption>
+    </figure>
     <p>Next, change <code>let x = "four";</code> to <code>x = "four";</code>. Notice the difference: without <code>let</code>, this is an attempted reassignment of an existing integer binding, not shadowing. Restore the original code when you have seen the error.</p>
   </section>
 
