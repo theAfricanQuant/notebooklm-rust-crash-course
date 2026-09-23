@@ -33,7 +33,7 @@ The original course is Tech With Tim’s [Rust Programming Tutorial playlist](ht
 | --- | --- | --- |
 | `03-introduction.md` | Introduction and first program | Day 1 complete |
 | `04-rust-tools.md` | Cargo and Rust tools | Day 2 complete |
-| `05-variables-constants-shadowing.md` | Variables, constants, shadowing | Planned |
+| `05-variables-constants-shadowing.md` | Variables, constants, shadowing | Day 3 complete |
 | `06-data-types.md` | Data types | Planned |
 | `07-console-input.md` | Console input | Planned |
 | `08-arithmetic-type-casting.md` | Arithmetic and type casting | Planned |
@@ -124,6 +124,16 @@ Useful mapping:
 
 Use `rustc hello.rs` for Day 1 because it makes compilation visible. Use `cargo run` once you are inside a real Cargo project containing `Cargo.toml`.
 
+## Day 3: variables, constants, and shadowing
+
+The learner created `practice/day-03-variables` with Cargo and ran the Day 3 program successfully. The program demonstrated immutable bindings, shadowing across scopes, a mutable `deliveries` value, and the `SECONDS_PER_MINUTE` constant.
+
+The learner also deliberately removed `mut` from `deliveries`. Zed reported error E0384 before the program ran, and `cargo run` then confirmed the same error with the exact fix: make the binding mutable.
+
+![Cargo explains that deliveries cannot be reassigned because it was declared without mut](assets/day-03-cargo-immutable-error.png)
+
+The completed lesson is [Day 3 — Variables, constants, and shadowing](lessons/0003-variables-constants-shadowing.html). The demonstrated milestone is recorded in [learning-records/0003-variables-constants-shadowing.md](learning-records/0003-variables-constants-shadowing.md).
+
 ## Repository layout
 
 ```text
@@ -132,13 +142,20 @@ Use `rustc hello.rs` for Day 1 because it makes compilation visible. Use `cargo 
 ├── 04-rust-tools.md                # Day 2 course export
 ├── assets/
 │   ├── course.css                  # Shared visual system for every lesson
-│   └── day-01-first-success.png    # Real Day 1 Zed result
+│   ├── day-01-first-success.png    # Real Day 1 Zed result
+│   └── day-03-*.png                # Real Day 3 Zed and Cargo diagnostics
 ├── lessons/
-│   └── 0001-rust-introduction.html # Completed interactive lesson
+│   ├── 0001-rust-introduction.html # Completed interactive lesson
+│   ├── 0002-cargo-and-rust-tools.html
+│   └── 0003-variables-constants-shadowing.html
 ├── learning-records/
-│   └── 0001-first-rust-binary.md   # Demonstrated Day 1 milestone
+│   ├── 0001-first-rust-binary.md   # Demonstrated Day 1 milestone
+│   ├── 0002-first-cargo-project.md
+│   └── 0003-variables-constants-shadowing.md
 ├── practice/
-│   └── day-01-hello/hello.rs       # Runnable Day 1 source code
+│   ├── day-01-hello/hello.rs       # Runnable Day 1 source code
+│   ├── day-02-cargo-greeting/      # Runnable Day 2 Cargo project
+│   └── day-03-variables/           # Runnable Day 3 Cargo project
 ├── reference/                      # Compact reusable reference pages
 ├── templates/lesson.html           # Starting structure for every new lesson
 ├── AGENTS.md                       # Instructions for human/AI continuation
@@ -160,7 +177,7 @@ Any coding agent or LLM working in this repository should read [AGENTS.md](AGENT
 - How to reuse [templates/lesson.html](templates/lesson.html) and [assets/course.css](assets/course.css)
 - When to create learning records
 
-To build Day 2, tell the agent: “Create Day 2 from `04-rust-tools.md`, preserving the visual template and Zed workflow.”
+To build Day 4, tell the agent: “Create Day 4 from `06-data-types.md`, preserving the visual template and Zed workflow.”
 
 ## Optional enrichment
 

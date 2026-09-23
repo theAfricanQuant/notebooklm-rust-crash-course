@@ -18,9 +18,9 @@ The local chapter exports determine the sequence and core content. Visible attri
 
 ## Current state
 
-- Day 1 is complete: `lessons/0001-rust-introduction.html`.
-- Evidence is in `learning-records/0001-first-rust-binary.md`.
-- The next source is `04-rust-tools.md`; do not create it until the user asks to move on.
+- Days 1–3 are complete: `lessons/0001-rust-introduction.html`, `lessons/0002-cargo-and-rust-tools.html`, and `lessons/0003-variables-constants-shadowing.html`.
+- Evidence is in `learning-records/0001-first-rust-binary.md`, `learning-records/0002-first-cargo-project.md`, and `learning-records/0003-variables-constants-shadowing.md`.
+- The next source is `06-data-types.md`; do not create it until the user asks to move on.
 
 ## Lesson contract
 
