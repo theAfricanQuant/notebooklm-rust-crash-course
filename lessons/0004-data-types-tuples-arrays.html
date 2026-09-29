@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rust Crash Course — Day 4: scalar and compound data types.">
+  <title>Day 4 — Data types, tuples, and arrays</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="eyebrow">Rust Crash Course · Day 4 · Practice record</p>
+  <h1>Give every value a shape.</h1>
+  <p class="lede">Use Rust’s scalar types for single facts, then combine related facts with tuples and arrays. Today’s program turns a small offer request into typed data Rust can check for you.</p>
+  <div class="meta"><span>35–45 minutes</span><span>One finished Cargo project</span><span>Types · tuples · arrays</span></div>
+
+  <section class="card">
+    <h2>What you completed</h2>
+    <p>You created <code>practice/day-04-data-types</code>, opened it in Zed, wrote a typed Rust program, and repeatedly used <code>cargo fmt &amp;&amp; cargo run</code>. The final program compiled cleanly and printed an offer-style set of facts: jobs, price, approval state, grade, customer information, and services.</p>
+    <div class="callout"><strong>The big idea:</strong> a type tells Rust what kind of value a name holds. That lets the compiler catch mismatches before your program reaches a user.</div>
+  </section>
+
+  <section class="card">
+    <h2>Vocabulary first: what is a primitive data type?</h2>
+    <p>A <strong>primitive data type</strong> is a fundamental value type built into the Rust language. You can use one immediately—Rust already knows how to store it, check it, and operate on it. You do not have to define a <code>struct</code>, <code>enum</code>, or custom <code>type</code> before using it.</p>
+    <div class="mapping">
+      <div><small>Primitive scalar</small><strong>One value</strong><span>Integers, floating-point numbers, booleans, and characters each represent one value.</span></div>
+      <div><small>Primitive compound</small><strong>Several values together</strong><span>Tuples and arrays are also built into Rust, but they group values into one compound value.</span></div>
+      <div><small>Not primitive</small><strong>A type you define</strong><span>A future <code>struct Offer</code> or <code>enum Status</code> is your own custom type, built from these primitives and other types.</span></div>
+      <div><small>Why it matters</small><strong>Rust can check it early</strong><span>Knowing a value’s type lets Rust prevent mistakes such as putting <code>true</code> where a price is expected.</span></div>
+    </div>
+    <div class="callout"><strong>Relationship to this lesson:</strong> <em>scalar</em> describes a primitive that holds one value. <em>compound</em> describes a built-in type that groups values. Both are part of Rust’s primitive-type foundation.</div>
+  </section>
+
+  <section class="card">
+    <h2>Scalar types: one value at a time</h2>
+    <p>Rust has several basic, or <strong>scalar</strong>, types. You used four of the most useful ones.</p>
+    <div class="mapping">
+      <div><small>Unsigned whole number</small><strong><code>u32</code></strong><span>A non-negative whole number, such as <code>4</code> jobs.</span></div>
+      <div><small>Decimal number</small><strong><code>f64</code></strong><span>A decimal value, such as <code>49.95</code>.</span></div>
+      <div><small>True or false</small><strong><code>bool</code></strong><span>A state with only two possible values: <code>true</code> or <code>false</code>.</span></div>
+      <div><small>One character</small><strong><code>char</code></strong><span>A single Unicode character, written with single quotes: <code>'A'</code>.</span></div>
+    </div>
+    <pre><code>let jobs: u32 = 4;
+let price: f64 = 49.95;
+let approved: bool = true;
+let grade: char = 'A';</code></pre>
+    <p>The annotation after the colon is optional when Rust can infer the type. Keeping it here is valuable practice: it makes the intent visible and helps you learn the vocabulary.</p>
+  </section>
+
+  <section class="card">
+    <h2>Integers: signed, unsigned, and the default</h2>
+    <p>An <strong>integer</strong> is a whole number. Its type tells Rust two things: whether it may be negative, and how much memory Rust reserves for it. The letter is the sign rule; the number is the number of bits.</p>
+    <div class="mapping">
+      <div><small>Signed</small><strong><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code></strong><span>Use <code>i</code> when a value can be negative. An <code>i8</code> holds <code>-128</code> through <code>127</code>.</span></div>
+      <div><small>Unsigned</small><strong><code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code></strong><span>Use <code>u</code> when a value can never be negative. A <code>u8</code> holds <code>0</code> through <code>255</code>.</span></div>
+      <div><small>Machine-sized signed</small><strong><code>isize</code></strong><span>Its size matches the computer’s address size: normally 64 bits on a modern 64-bit computer.</span></div>
+      <div><small>Machine-sized unsigned</small><strong><code>usize</code></strong><span>Also matches address size. Rust commonly uses it for collection positions and lengths, including array indexes.</span></div>
+    </div>
+    <pre><code>// Signed: a temperature may be below zero.
+let temperature: i8 = -12;
+
+// Unsigned: a count cannot be below zero.
+let jobs: u32 = 4;
+
+// Rust infers i32 for an unconstrained whole-number literal.
+let default_integer = 42; // i32</code></pre>
+    <p>When you write an ordinary whole-number literal like <code>42</code> and the surrounding code gives Rust no stronger clue, Rust defaults to <code>i32</code>. That is a signed 32-bit integer, ranging from <code>-2,147,483,648</code> to <code>2,147,483,647</code>. Rust uses <code>i32</code> because it is usually a practical balance of range and performance.</p>
+    <div class="callout"><strong>Choose by meaning, not by habit:</strong> use a signed type when negative values make sense; use an unsigned type when they do not. For a normal counter, <code>u32</code> is clear. For an array position, use <code>usize</code>. Do not reach for a smaller type merely to save space unless that tradeoff matters.</div>
+  </section>
+
+  <section class="card">
+    <h2>Compound types: related values together</h2>
+    <p>When one fact is not enough, Rust gives you structures that group values without needing a custom type yet.</p>
+    <div class="flow">
+      <div><small>Different types, fixed positions</small><strong>Tuple</strong><span><code>("Müller", 3)</code> groups a text value and a number.</span></div>
+      <div><small>Same type, fixed length</small><strong>Array</strong><span><code>["Hedge trimming", "Lawn care", "Cleanup"]</code> holds three text values.</span></div>
+      <div><small>Read one item</small><strong>Access by position</strong><span>Use <code>.0</code> for a tuple field and <code>[0]</code> for an array item.</span></div>
+    </div>
+    <pre><code>let customer = ("Müller", 3);
+println!("The customer's name is {}", customer.0);
+println!("Service count is {}", customer.1);
+
+let services = ["Hedge trimming", "Lawn care", "Cleanup"];
+println!("The first service is {}", services[0]);</code></pre>
+    <div class="callout"><strong>Counting starts at zero:</strong> in an array, <code>services[0]</code> is the first service, <code>services[1]</code> is the second, and <code>services[2]</code> is the third.</div>
+  </section>
+
+  <section class="card">
+    <h2>Formatting: variables are not expressions</h2>
+    <p>Rust can capture a simple variable name inside a format string. That is why this works:</p>
+    <pre><code>println!("Approved: {approved}");</code></pre>
+    <p>Tuple access and array indexing are expressions, not simple variable names. They cannot go inside captured braces. Use a positional placeholder, <code>{}</code>, and provide the expression after the format string instead.</p>
+    <pre><code>// Works
+println!("Customer: {}", customer.0);
+println!("First service: {}", services[0]);
+
+// Does not work
+// println!("Customer: {customer.0}");
+// println!("First service: {services[0]}");</code></pre>
+    <figure class="lesson-shot">
+      <img src="../assets/day-04-format-expression-error.png" alt="Zed flags customer.0 and customer.1 inside captured format-string braces because tuple index access is not supported there.">
+      <figcaption>Learner evidence, Day 4: Zed correctly flags <code>{customer.0}</code> and <code>{customer.1}</code>. Capture syntax accepts a name; <code>customer.0</code> is an expression. The durable fix is <code>"{}", customer.0</code>.</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h2>How one missing quote creates many errors</h2>
+    <p>After the formatting fix, the service array looked guilty because the compiler reported unknown prefixes such as <code>trimming</code> and <code>care</code>. The real problem began earlier: the customer <code>println!</code> had an opening quote but no closing quote before <code>, customer.0</code>.</p>
+    <pre><code>// Broken: the string starts after !(
+println!("the customer's Name is {}, customer.0);
+
+// Fixed: the format string ends before the comma
+println!("The customer's name is {}", customer.0);</code></pre>
+    <p>When a string remains open, Rust reads later quotation marks in the wrong context. That produces a cascade: the array line and the later <code>println!</code> look broken even though their text can be correct.</p>
+    <figure class="lesson-shot">
+      <img src="../assets/day-04-unterminated-string-error.png" alt="Zed displays unknown literal prefix errors for trimming and care and an unterminated double quote error after an earlier println macro is missing a closing quote.">
+      <figcaption>Learner evidence, Day 4: the red underlines appear at <code>trimming</code>, <code>care</code>, and the final print line. Trace upward to the first unmatched quote instead of trying to repair every later diagnostic.</figcaption>
+    </figure>
+    <div class="callout"><strong>Debugging habit:</strong> when one syntax error creates several strange errors, repair the earliest red line first. Then run the formatter and compiler again before changing anything else.</div>
+  </section>
+
+  <section class="practice">
+    <p class="eyebrow">Zed lab · your completed program</p>
+    <h2>Rebuild Day 4 from a blank file</h2>
+    <ol>
+      <li>Open Zed’s integrated terminal with <kbd>Ctrl</kbd> + <kbd>`</kbd>.</li>
+      <li>From the course root, create and enter a new Cargo project.</li>
+      <li>Open the project in Zed and replace <code>src/main.rs</code>.</li>
+    </ol>
+    <pre><code>cd "/home/siseng/Documents/08_Personal/programing_languages/Rust/notebooklm-rust-crash-course/practice"
+cargo new day-04-data-types
+cd day-04-data-types
+zed .</code></pre>
+    <pre><code>fn main() {
+    let jobs: u32 = 4;
+    println!("Jobs = {jobs}");
+
+    let price: f64 = 49.95;
+    println!("Price is {price}");
+
+    let approved: bool = true;
+    println!("approved is {approved}");
+
+    let grade: char = 'A';
+    println!("grade = {grade}");
+
+    let customer = ("Müller", 3);
+    println!("the customer's Name is {}", customer.0);
+    println!("service count is {}", customer.1);
+
+    let services = ["Hedge trimming", "Lawn care", "Cleanup"];
+    println!("The first service is {}", services[0]);
+}</code></pre>
+    <p>Save the file, then format and run it:</p>
+    <pre><code>cargo fmt &amp;&amp; cargo run</code></pre>
+    <p><strong>Successful output:</strong></p>
+    <pre><code>Jobs = 4
+Price is 49.95
+approved is true
+grade = A
+the customer's Name is Müller
+service count is 3
+The first service is Hedge trimming</code></pre>
+  </section>
+
+  <section class="quiz">
+    <p class="eyebrow">Retrieval check</p>
+    <h2>Which line correctly prints the first item in <code>services</code>?</h2>
+    <button type="button" data-answer="no"><code>println!("First: {services[0]}");</code></button>
+    <button type="button" data-answer="yes"><code>println!("First: {}", services[0]);</code></button>
+    <button type="button" data-answer="no"><code>println!("First: {}", services.0);</code></button>
+    <p class="feedback" aria-live="polite"></p>
+  </section>
+
+  <section class="practice checklist">
+    <p class="eyebrow">Finish line</p>
+    <h2>Before Day 5</h2>
+    <label><input type="checkbox"> I can name the four scalar types I used.</label>
+    <label><input type="checkbox"> I can explain why a tuple can mix types while an array cannot.</label>
+    <label><input type="checkbox"> I can use <code>{}</code> when I need to print <code>customer.0</code> or <code>services[0]</code>.</label>
+    <label><input type="checkbox"> I can use the first compiler error to find the root cause of a cascade.</label>
+    <p><strong>Next:</strong> Day 5 introduces functions—giving a block of Rust a name, input, and result.</p>
+  </section>
+
+  <p class="footer">Your Day 4 practice record. The error screenshots are your own Zed session, preserved here as debugging examples.</p>
+</main>
+<script>
+  document.querySelectorAll('[data-answer]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const feedback = button.parentElement.querySelector('.feedback');
+      feedback.textContent = button.dataset.answer === 'yes'
+        ? 'Correct. Put the expression after the format string and use {} as its placeholder.'
+        : 'Not quite. Captured braces accept simple variable names, and .0 belongs to tuples rather than arrays.';
+      feedback.className = `feedback ${button.dataset.answer === 'yes' ? 'correct' : 'incorrect'}`;
+    });
+  });
+</script>
+</body>
+</html>
