@@ -34,9 +34,9 @@ The original course is Tech With Tim’s [Rust Programming Tutorial playlist](ht
 | `03-introduction.md` | Introduction and first program | Day 1 complete |
 | `04-rust-tools.md` | Cargo and Rust tools | Day 2 complete |
 | `05-variables-constants-shadowing.md` | Variables, constants, shadowing | Day 3 complete |
-| `06-data-types.md` | Data types | Planned |
-| `07-console-input.md` | Console input | Planned |
-| `08-arithmetic-type-casting.md` | Arithmetic and type casting | Planned |
+| `06-data-types.md` | Data types | Day 4 complete |
+| `07-console-input.md` | Console input | Day 5 complete |
+| `08-arithmetic-type-casting.md` | Arithmetic and type casting | Day 6 complete |
 | `09-control-flow.md` | Conditions and control flow | Planned |
 | `10-functions-expressions-statements.md` | Functions, expressions, statements | Planned |
 | `11-memory-heap-stack.md` | Memory, heap, and stack | Planned |
@@ -134,6 +134,31 @@ The learner also deliberately removed `mut` from `deliveries`. Zed reported erro
 
 The completed lesson is [Day 3 — Variables, constants, and shadowing](lessons/0003-variables-constants-shadowing.html). The demonstrated milestone is recorded in [learning-records/0003-variables-constants-shadowing.md](learning-records/0003-variables-constants-shadowing.md).
 
+## Day 4: data types, tuples, and arrays
+
+The learner created `practice/day-04-data-types` and ran it successfully with `cargo fmt && cargo run`. The program practises primitive data types: signed and unsigned integers, Rust's default `i32` inference for an unconstrained integer literal, floating-point values, booleans, characters, tuples, and fixed-length arrays.
+
+Day 4 also records two useful debugging lessons from the learner's Zed session:
+
+- Captured format placeholders accept simple names such as `{approved}`. Tuple access and array indexing are expressions, so use positional formatting instead: `println!("{}", customer.0)` or `println!("{}", services[0])`.
+- A missing closing quotation mark can create a cascade of misleading errors later in the file. Repair the earliest unmatched quote first, then format and compile again.
+
+![Zed explains that tuple-field access cannot appear inside a captured format placeholder](assets/day-04-format-expression-error.png)
+
+![Zed shows cascading syntax errors caused by an earlier unterminated format string](assets/day-04-unterminated-string-error.png)
+
+The completed lesson is [Day 4 — Data types, tuples, and arrays](lessons/0004-data-types-tuples-arrays.html). It includes the final runnable program, the real error screenshots, explanations of signed versus unsigned integer ranges, and an interactive retrieval check.
+
+## Day 5: console input
+
+The learner created `practice/day-05-console-input` and ran the terminal greeter in Zed. The program imports `std::io`, creates a mutable empty `String`, passes a mutable reference to `read_line`, and prints the entered name. The completed lesson is [Day 5 — Read a name from the terminal](lessons/0005-console-input.html); its learner evidence is in [learning-records/0005-console-input.md](learning-records/0005-console-input.md).
+
+## Day 6: arithmetic and type casting
+
+The learner created `practice/day-06-arithmetic-casting` and ran a weekly-minutes calculator in Zed. It parses terminal text as an `i64`, shows integer division and the remainder, then explicitly casts to `f64` to produce a decimal average. With `95` minutes across seven days, the output was a whole-number average of `13`, a remainder of `4`, and a precise average of `13.571428571428571`.
+
+The completed lesson is [Day 6 — Calculate with the right type](lessons/0006-arithmetic-and-type-casting.html); its learner evidence is in [learning-records/0004-arithmetic-and-type-casting.md](learning-records/0004-arithmetic-and-type-casting.md).
+
 ## Repository layout
 
 ```text
@@ -143,11 +168,15 @@ The completed lesson is [Day 3 — Variables, constants, and shadowing](lessons/
 ├── assets/
 │   ├── course.css                  # Shared visual system for every lesson
 │   ├── day-01-first-success.png    # Real Day 1 Zed result
-│   └── day-03-*.png                # Real Day 3 Zed and Cargo diagnostics
+│   ├── day-03-*.png                # Real Day 3 Zed and Cargo diagnostics
+│   └── day-04-*.png                # Real Day 4 Zed diagnostics
 ├── lessons/
 │   ├── 0001-rust-introduction.html # Completed interactive lesson
 │   ├── 0002-cargo-and-rust-tools.html
-│   └── 0003-variables-constants-shadowing.html
+│   ├── 0003-variables-constants-shadowing.html
+│   ├── 0004-data-types-tuples-arrays.html
+│   ├── 0005-console-input.html
+│   └── 0006-arithmetic-and-type-casting.html
 ├── learning-records/
 │   ├── 0001-first-rust-binary.md   # Demonstrated Day 1 milestone
 │   ├── 0002-first-cargo-project.md
@@ -155,7 +184,10 @@ The completed lesson is [Day 3 — Variables, constants, and shadowing](lessons/
 ├── practice/
 │   ├── day-01-hello/hello.rs       # Runnable Day 1 source code
 │   ├── day-02-cargo-greeting/      # Runnable Day 2 Cargo project
-│   └── day-03-variables/           # Runnable Day 3 Cargo project
+│   ├── day-03-variables/           # Runnable Day 3 Cargo project
+│   ├── day-04-data-types/          # Runnable Day 4 Cargo project
+│   ├── day-05-console-input/       # Runnable Day 5 Cargo project
+│   └── day-06-arithmetic-casting/  # Runnable Day 6 Cargo project
 ├── reference/                      # Compact reusable reference pages
 ├── templates/lesson.html           # Starting structure for every new lesson
 ├── AGENTS.md                       # Instructions for human/AI continuation
@@ -177,7 +209,7 @@ Any coding agent or LLM working in this repository should read [AGENTS.md](AGENT
 - How to reuse [templates/lesson.html](templates/lesson.html) and [assets/course.css](assets/course.css)
 - When to create learning records
 
-To build Day 4, tell the agent: “Create Day 4 from `06-data-types.md`, preserving the visual template and Zed workflow.”
+To build Day 7, tell the agent: “Create Day 7 from `09-control-flow.md`, preserving the visual template and Zed workflow.”
 
 ## Optional enrichment
 
