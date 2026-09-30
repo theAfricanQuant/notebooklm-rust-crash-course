@@ -34,11 +34,12 @@
 
   <section class="card">
     <h2>Why Rust asks for <code>mut</code></h2>
-    <p><code>String::new()</code> starts with an empty string. The next step changes it by adding the line you typed, so the binding must be mutable:</p>
+    <p><code>String::new()</code> starts with an empty string. The next step changes that same string by adding the line you typed, so the binding must be mutable:</p>
     <pre><code>let mut name = String::new();
 io::stdin()
     .read_line(&amp;mut name)
     .expect("Failed to read line.");</code></pre>
+    <p>Rust makes a binding immutable unless you explicitly write <code>mut</code>. Here, <code>name</code> is the name bound to an empty <code>String</code>; <code>read_line</code> needs to put your characters into that existing string. <code>&amp;mut name</code> lends <code>read_line</code> temporary, exclusive permission to update it. Without <code>mut</code>, Rust rejects that request before the program runs.</p>
     <p><code>read_line</code> returns a <code>Result</code>: either the input was read or an error occurred. Calling <code>expect(...)</code> handles the error case by stopping with your helpful message instead of leaving Rust’s “unused result” warning behind. The exact mechanics of <code>Result</code> come later; the important habit now is to handle an operation that can fail.</p>
   </section>
 
