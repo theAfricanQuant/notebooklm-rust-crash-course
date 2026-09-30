@@ -23,6 +23,26 @@
   </section>
 
   <section class="card">
+    <h2>Why does <code>use std::io;</code> come first?</h2>
+    <p>This is a <strong>use declaration</strong>, commonly called an <strong>import</strong>. It appears at the top by convention, so a reader can see which outside functionality this file relies on before reaching <code>main</code>. Rust does not require it to be physically first; the declaration makes the name available throughout its module.</p>
+    <div class="mapping">
+      <div><small>Crate</small><strong><code>std</code></strong><span>Rust’s standard library: functionality included with Rust.</span></div>
+      <div><small>Module</small><strong><code>io</code></strong><span>The standard library’s input/output area.</span></div>
+      <div><small>Function</small><strong><code>stdin()</code></strong><span>A function in <code>io</code> that represents terminal input.</span></div>
+      <div><small>Why import?</small><strong>Shorter path</strong><span>Write <code>io::stdin()</code> instead of <code>std::io::stdin()</code>.</span></div>
+    </div>
+    <pre><code>// Both refer to the same function.
+io::stdin();
+std::io::stdin();</code></pre>
+    <p>An import can bring different kinds of names into scope—not only modules. These are examples you will meet later:</p>
+    <pre><code>use std::fs;                   // module: file-system tools
+use std::collections::HashMap; // type
+use std::io::Read;             // trait
+use std::time::Duration;       // type
+use std::env::args;            // function</code></pre>
+  </section>
+
+  <section class="card">
     <h2>Follow the input path</h2>
     <div class="flow">
       <div><small>Make an empty container</small><strong><code>String::new()</code></strong><span>Create a string that Rust can grow.</span></div>
