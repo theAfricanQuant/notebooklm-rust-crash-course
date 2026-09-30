@@ -90,11 +90,27 @@ fn main() {
   </section>
 
   <section class="card">
+    <h2>Read the result: two real runs</h2>
+    <p>The calculator separates a division into three useful views. The relationship is always <code>weekly_minutes = (days × whole_daily_average) + remainder</code>.</p>
+    <div class="mapping">
+      <div><small>Input</small><strong><code>16</code> minutes</strong><span><code>16 = (7 × 2) + 2</code>.</span></div>
+      <div><small>Result</small><strong><code>2</code>, <code>2</code>, <code>2.285714…</code></strong><span>Whole average, remainder, then precise average.</span></div>
+      <div><small>Input</small><strong><code>95</code> minutes</strong><span><code>95 = (7 × 13) + 4</code>.</span></div>
+      <div><small>Result</small><strong><code>13</code>, <code>4</code>, <code>13.571428…</code></strong><span>Integer division drops the fraction; decimal division retains it.</span></div>
+    </div>
+    <pre><code>95 minutes over 7 days:
+Whole-number daily average: 13
+Precise daily average: 13.571428571428571
+Minutes left after equal whole-minute days: 4</code></pre>
+    <p>The difference is not an arithmetic mistake. <code>95_i64 / 7_i64</code> has an integer result, so it keeps only <code>13</code>. After conversion, <code>95.0_f64 / 7.0_f64</code> can represent the fractional part.</p>
+  </section>
+
+  <section class="card">
     <h2>Make Rust catch a mixed-type calculation</h2>
     <p>After the successful run, temporarily remove only the first cast:</p>
     <pre><code>// Temporarily broken: i64 divided by f64
 let precise_daily_average = weekly_minutes / days as f64;</code></pre>
-    <p>Save and run <code>cargo fmt &amp;&amp; cargo run</code>. Rust should say there is no implementation for <code>i64 / f64</code>. Restore <code>weekly_minutes as f64</code> and rerun. The fix is not “make the error disappear”; it is to choose the decimal calculation you actually intended.</p>
+    <p>Save and run <code>cargo fmt &amp;&amp; cargo run</code>. Rust should say there is no implementation for <code>i64 / f64</code>. Restore <code>weekly_minutes as f64</code> and rerun. Rust needs both operands to have compatible types; the intended decimal calculation is <code>f64 / f64</code>, not an automatic mixture of an integer and a float.</p>
   </section>
 
   <section class="quiz">
