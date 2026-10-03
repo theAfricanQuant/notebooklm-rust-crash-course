@@ -18,9 +18,9 @@ The local chapter exports determine the sequence and core content. Visible attri
 
 ## Current state
 
-- Days 1–8 are complete: the lessons run from `lessons/0001-rust-introduction.html` through `lessons/0008-functions-expressions-statements.html`.
-- Learner evidence is stored in `learning-records/`; Day 7 and Day 8 outcomes are summarized in the README and their practice projects.
-- The next source is `11-memory-heap-stack.md`; do not create it until the user asks to move on.
+- Days 1–9 are complete: the lessons run from `lessons/0001-rust-introduction.html` through `lessons/0009-memory-stack-heap.html`.
+- Learner evidence is stored in `learning-records/`; Day 7–9 outcomes are summarized in the README and their practice projects.
+- The downloaded course source currently ends at `11-memory-heap-stack.md`. Select new source material with the learner before authoring a further day.
 
 ## Lesson contract
 

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rust Crash Course — Day 9: stack and heap memory.">
+  <title>Day 9 — Where Rust keeps your data</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="eyebrow">Rust Crash Course · Day 9 · Source 11</p>
+  <h1>Where does Rust keep your data?</h1>
+  <p class="lede">See the simple difference between stack memory for fixed-size values and heap memory for data that can grow.</p>
+  <div class="meta"><span>25–35 minutes</span><span>One small program</span><span>Stack and heap</span></div>
+
+  <section class="card">
+    <h2>The big idea</h2>
+    <p>When a program runs, it uses computer memory to keep track of its values. Rust uses two important areas called the <strong>stack</strong> and the <strong>heap</strong>. Think of them as two different ways to organize memory—not as the stack and heap data structures from an algorithms class.</p>
+    <p>For now, remember this simple rule: fixed-size values such as an <code>i32</code> fit directly into a stack slot. Data that can change size, such as a growable <code>String</code>, uses space on the heap.</p>
+    <p><strong>Course source:</strong> Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>.</p>
+  </section>
+
+  <section class="callout">
+    <h2>A picture to keep in mind</h2>
+    <div class="mapping" aria-label="Simple model of stack and heap memory">
+      <div><small>Stack · quick, orderly slots</small><strong><code>score: 95</code></strong>The fixed-size integer value fits directly here.</div>
+      <div><small>Stack · a small String handle</small><strong><code>language: where, how long, how much room</code></strong>The <code>String</code> value keeps the information Rust needs to find its text.</div>
+      <div><small>Heap · growable space</small><strong><code>R u s t</code></strong>The actual characters for the <code>String</code> are stored here, where the text can grow or shrink.</div>
+      <div><small>Python connection</small><strong>Python hides these choices</strong>Rust makes some of the rules easier to see. Its compiler helps manage the memory safely.</div>
+    </div>
+    <p>This is a teaching picture, not a map of every byte. The important part is that a <code>String</code> has a small, fixed-size handle and separately stored text that can change size.</p>
+  </section>
+
+  <section class="card">
+    <h2>What is the stack?</h2>
+    <p>The stack keeps track of a function’s active work. Imagine a pile of trays: you put a new tray on top, and you take the top tray off first. In code, each function call gets its own working area. When that function finishes, its area is cleared.</p>
+    <p>Values such as numbers and <code>bool</code>s have a known size, so Rust can give them predictable space. This makes stack storage quick to work with.</p>
+  </section>
+
+  <section class="card">
+    <h2>What is the heap?</h2>
+    <p>The heap is a more flexible area for data whose size can change. A <code>String</code> can hold a short word now and more text later. Rust asks the memory allocator to find room for those characters.</p>
+    <p>The <code>String</code> value on the stack keeps a pointer (where the text is), a length (how many characters’ bytes are being used), and a capacity (how much room is available). You do not need to manage those details by hand; Rust’s <code>String</code> type does that work for you.</p>
+    <p>Finding heap space and following a pointer can take extra work compared with reading a simple stack value. That does not mean you should avoid <code>String</code>. Use the kind of value your program needs; Rust makes both stack and heap storage practical.</p>
+  </section>
+
+  <section class="practice">
+    <p class="eyebrow">Make your practice file</p>
+    <h2>Create the Day 9 project</h2>
+    <p>In Zed’s integrated terminal, create the Cargo project and open it:</p>
+    <pre><code>cd /home/siseng/Documents/08_Personal/programing_languages/Rust/notebooklm-rust-crash-course/practice
+cargo new day-09-memory
+zed day-09-memory</code></pre>
+    <p>In Zed, open <code>src/main.rs</code>. Keep the terminal open with <kbd>Ctrl</kbd> + <kbd>`</kbd>. Save with <kbd>Ctrl</kbd> + <kbd>S</kbd> and run <code>cargo fmt &amp;&amp; cargo run</code> from the project folder.</p>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Step 1 · one fixed-size value</p>
+    <h2>Put an integer to work</h2>
+    <p>Replace the contents of <code>src/main.rs</code> with this:</p>
+    <pre><code>fn main() {
+    let score: i32 = 95;
+    println!("Score: {score}");
+}</code></pre>
+    <p>Run <code>cargo fmt &amp;&amp; cargo run</code>. You should see <code>Score: 95</code>. An <code>i32</code> always has the same size, so it is a good example of a value stored directly in a stack slot.</p>
+  </section>
+
+  <section class="card">
+    <p class="eyebrow">Step 2 · text that can grow</p>
+    <h2>Add a <code>String</code></h2>
+    <p>Add these lines inside <code>main</code>, just below the <code>score</code> line:</p>
+    <pre><code>let language = String::from("Rust");
+println!("Language: {language}");
+println!("Text length: {} bytes", language.len());</code></pre>
+    <p>Save and run again. You should see the language and a length of <code>4</code>. The <code>language</code> variable has a small handle on the stack; its text lives in flexible heap space. <code>String::from</code> makes an owned, growable string from the text.</p>
+    <p>Change <code>"Rust"</code> to <code>"Rust is fun"</code> and run again. The string now has more text. Its length is measured in bytes; these example characters use one byte each.</p>
+  </section>
+
+  <section class="callout">
+    <h2>When the function is done</h2>
+    <p>At the end of <code>main</code>, its local variables are no longer needed. Rust clears the stack work for that function. The <code>String</code> also takes care of releasing its heap space when it is no longer in use. The next chapter explains the ownership rule Rust uses to know when that should happen.</p>
+    <p>For now, do not worry about manually freeing memory. Notice that you created and used a growable string, and Rust handles its cleanup.</p>
+  </section>
+
+  <section class="quiz">
+    <p class="eyebrow">Retrieval check</p>
+    <h2>Where does the text held by <code>String::from("Rust")</code> go in our simple model?</h2>
+    <button type="button" data-answer="wrong">Only in the stack, because the variable is named <code>language</code>.</button>
+    <button type="button" data-answer="correct">The growable text is on the heap; a small handle to it is on the stack.</button>
+    <button type="button" data-answer="wrong">It is stored in the program’s function name.</button>
+    <p class="feedback" aria-live="polite"></p>
+  </section>
+
+  <section class="practice checklist">
+    <p class="eyebrow">Finish line</p>
+    <h2>Show what you noticed</h2>
+    <label><input type="checkbox"> I ran the program and saw the score, language, and string length.</label>
+    <label><input type="checkbox"> I changed the text and saw its byte length change.</label>
+    <label><input type="checkbox"> I can explain where the fixed-size number and growable text are stored in our simple model.</label>
+    <p><strong>Reply with:</strong> the output after changing the text to <code>Rust is fun</code>, and one sentence describing what the <code>String</code> keeps on the stack and what it stores on the heap.</p>
+  </section>
+
+  <p class="footer">Course source: Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>.</p>
+</main>
+<script>
+  const feedback = document.querySelector('.feedback');
+  document.querySelectorAll('[data-answer]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const correct = button.dataset.answer === 'correct';
+      feedback.textContent = correct
+        ? 'Right. The text can grow on the heap; the String value on the stack keeps track of it.'
+        : 'Think about which part can change size: the String handle or the text it points to?';
+      feedback.className = `feedback ${correct ? 'correct' : 'incorrect'}`;
+    });
+  });
+</script>
+</body>
+</html>

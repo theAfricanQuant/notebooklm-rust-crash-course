@@ -39,7 +39,7 @@ The original course is Tech With Tim’s [Rust Programming Tutorial playlist](ht
 | `08-arithmetic-type-casting.md` | Arithmetic and type casting | Day 6 complete |
 | `09-control-flow.md` | Conditions and control flow | Day 7 complete |
 | `10-functions-expressions-statements.md` | Functions, expressions, statements | Day 8 complete |
-| `11-memory-heap-stack.md` | Memory, heap, and stack | Planned |
+| `11-memory-heap-stack.md` | Memory, heap, and stack | Day 9 complete |
 
 ## Prerequisites
 
@@ -171,6 +171,12 @@ The learner created `practice/day-08-functions` in Zed, defined and called funct
 
 The completed lesson is [Day 8 — Teach your Rust code to do a job](lessons/0008-functions-expressions-statements.html); learner evidence is in [learning-records/0008-functions-expressions-statements.md](learning-records/0008-functions-expressions-statements.md).
 
+## Day 9: stack and heap memory
+
+The learner ran a program with a fixed-size `i32` and a growable `String`, then changed the string to `Rust is fun!` and observed its length of 12 bytes. They explained that the stack keeps the `String` handle, including its pointer, length, and capacity, while the heap stores the text; the integer `95` is stored directly on the stack in the lesson's simple model.
+
+The completed lesson is [Day 9 — Where does Rust keep your data?](lessons/0009-memory-stack-heap.html); the practice project is `practice/day-09-memory`, and learner evidence is in [learning-records/0009-memory-stack-heap.md](learning-records/0009-memory-stack-heap.md).
+
 ## Repository layout
 
 ```text
@@ -190,11 +196,16 @@ The completed lesson is [Day 8 — Teach your Rust code to do a job](lessons/000
 │   ├── 0005-console-input.html
 │   ├── 0006-arithmetic-and-type-casting.html
 │   ├── 0007-control-flow.html
-│   └── 0008-functions-expressions-statements.html
+│   ├── 0008-functions-expressions-statements.html
+│   └── 0009-memory-stack-heap.html
 ├── learning-records/
 │   ├── 0001-first-rust-binary.md   # Demonstrated Day 1 milestone
 │   ├── 0002-first-cargo-project.md
-│   └── 0003-variables-constants-shadowing.md
+│   ├── 0003-variables-constants-shadowing.md
+│   ├── 0004-arithmetic-and-type-casting.md
+│   ├── 0005-console-input.md
+│   ├── 0008-functions-expressions-statements.md
+│   └── 0009-memory-stack-heap.md
 ├── practice/
 │   ├── day-01-hello/hello.rs       # Runnable Day 1 source code
 │   ├── day-02-cargo-greeting/      # Runnable Day 2 Cargo project
@@ -203,7 +214,8 @@ The completed lesson is [Day 8 — Teach your Rust code to do a job](lessons/000
 │   ├── day-05-console-input/       # Runnable Day 5 Cargo project
 │   ├── day-06-arithmetic-casting/  # Runnable Day 6 Cargo project
 │   ├── day-07-control-flow/        # Runnable Day 7 Cargo project
-│   └── day-08-functions/           # Runnable Day 8 Cargo project
+│   ├── day-08-functions/           # Runnable Day 8 Cargo project
+│   └── day-09-memory/              # Runnable Day 9 Cargo project
 ├── reference/                      # Compact reusable reference pages
 ├── templates/lesson.html           # Starting structure for every new lesson
 ├── AGENTS.md                       # Instructions for human/AI continuation
@@ -225,7 +237,7 @@ Any coding agent or LLM working in this repository should read [AGENTS.md](AGENT
 - How to reuse [templates/lesson.html](templates/lesson.html) and [assets/course.css](assets/course.css)
 - When to create learning records
 
-To build Day 9, tell the agent: “Create Day 9 from `11-memory-heap-stack.md`, preserving the visual template and Zed workflow.”
+The downloaded course currently ends at Day 9. Choose the next source material before starting another lesson.
 
 ## Optional enrichment
 
