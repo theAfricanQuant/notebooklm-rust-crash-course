@@ -37,8 +37,8 @@ The original course is Tech With Tim’s [Rust Programming Tutorial playlist](ht
 | `06-data-types.md` | Data types | Day 4 complete |
 | `07-console-input.md` | Console input | Day 5 complete |
 | `08-arithmetic-type-casting.md` | Arithmetic and type casting | Day 6 complete |
-| `09-control-flow.md` | Conditions and control flow | Planned |
-| `10-functions-expressions-statements.md` | Functions, expressions, statements | Planned |
+| `09-control-flow.md` | Conditions and control flow | Day 7 complete |
+| `10-functions-expressions-statements.md` | Functions, expressions, statements | Day 8 complete |
 | `11-memory-heap-stack.md` | Memory, heap, and stack | Planned |
 
 ## Prerequisites
@@ -159,6 +159,18 @@ The learner created `practice/day-06-arithmetic-casting` and ran a weekly-minute
 
 The completed lesson is [Day 6 — Calculate with the right type](lessons/0006-arithmetic-and-type-casting.html); its learner evidence is in [learning-records/0004-arithmetic-and-type-casting.md](learning-records/0004-arithmetic-and-type-casting.md).
 
+## Day 7: control flow
+
+The learner built a practice-days decision program and tried inputs `0`, `6`, and `30`. They changed the foundation threshold from 6 to 7 and saw input `6` fall through to the final `else`. The lesson connects Rust's `else if`, `&&`, and `!` to Python's `elif`, `and`, and `not`.
+
+The completed lesson is [Day 7 — Make a Rust program choose](lessons/0007-control-flow.html); the practice project is `practice/day-07-control-flow`.
+
+## Day 8: functions, expressions, and statements
+
+The learner created `practice/day-08-functions` in Zed, defined and called functions, passed typed `i32` parameters, and returned a sum from `add_numbers`. Adding a semicolon to the final expression produced compiler error E0308 (`expected i32, found ()`); removing it restored the returned sum. The learner also used an early return in `days_until_goal`, observing `7` days remaining for 23 of 30 days and `0` when the goal was reached. They described the distinction in Python terms: a statement binds a variable without producing a value, while an expression evaluates to a value.
+
+The completed lesson is [Day 8 — Teach your Rust code to do a job](lessons/0008-functions-expressions-statements.html); learner evidence is in [learning-records/0008-functions-expressions-statements.md](learning-records/0008-functions-expressions-statements.md).
+
 ## Repository layout
 
 ```text
@@ -176,7 +188,9 @@ The completed lesson is [Day 6 — Calculate with the right type](lessons/0006-a
 │   ├── 0003-variables-constants-shadowing.html
 │   ├── 0004-data-types-tuples-arrays.html
 │   ├── 0005-console-input.html
-│   └── 0006-arithmetic-and-type-casting.html
+│   ├── 0006-arithmetic-and-type-casting.html
+│   ├── 0007-control-flow.html
+│   └── 0008-functions-expressions-statements.html
 ├── learning-records/
 │   ├── 0001-first-rust-binary.md   # Demonstrated Day 1 milestone
 │   ├── 0002-first-cargo-project.md
@@ -187,7 +201,9 @@ The completed lesson is [Day 6 — Calculate with the right type](lessons/0006-a
 │   ├── day-03-variables/           # Runnable Day 3 Cargo project
 │   ├── day-04-data-types/          # Runnable Day 4 Cargo project
 │   ├── day-05-console-input/       # Runnable Day 5 Cargo project
-│   └── day-06-arithmetic-casting/  # Runnable Day 6 Cargo project
+│   ├── day-06-arithmetic-casting/  # Runnable Day 6 Cargo project
+│   ├── day-07-control-flow/        # Runnable Day 7 Cargo project
+│   └── day-08-functions/           # Runnable Day 8 Cargo project
 ├── reference/                      # Compact reusable reference pages
 ├── templates/lesson.html           # Starting structure for every new lesson
 ├── AGENTS.md                       # Instructions for human/AI continuation
@@ -209,7 +225,7 @@ Any coding agent or LLM working in this repository should read [AGENTS.md](AGENT
 - How to reuse [templates/lesson.html](templates/lesson.html) and [assets/course.css](assets/course.css)
 - When to create learning records
 
-To build Day 7, tell the agent: “Create Day 7 from `09-control-flow.md`, preserving the visual template and Zed workflow.”
+To build Day 9, tell the agent: “Create Day 9 from `11-memory-heap-stack.md`, preserving the visual template and Zed workflow.”
 
 ## Optional enrichment
 

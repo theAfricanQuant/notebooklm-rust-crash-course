@@ -18,9 +18,9 @@ The local chapter exports determine the sequence and core content. Visible attri
 
 ## Current state
 
-- Days 1–6 are complete: the lessons run from `lessons/0001-rust-introduction.html` through `lessons/0006-arithmetic-and-type-casting.html`.
-- Learner evidence is in the Day 1–3 records plus `learning-records/0005-console-input.md` and `learning-records/0004-arithmetic-and-type-casting.md`. Day 4 completion material is recorded in the README and its practice project.
-- The next source is `09-control-flow.md`; do not create it until the user asks to move on.
+- Days 1–8 are complete: the lessons run from `lessons/0001-rust-introduction.html` through `lessons/0008-functions-expressions-statements.html`.
+- Learner evidence is stored in `learning-records/`; Day 7 and Day 8 outcomes are summarized in the README and their practice projects.
+- The next source is `11-memory-heap-stack.md`; do not create it until the user asks to move on.
 
 ## Lesson contract
 
