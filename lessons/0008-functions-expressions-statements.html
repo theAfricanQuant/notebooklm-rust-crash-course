@@ -11,24 +11,24 @@
 <main>
   <p class="eyebrow">Rust Crash Course · Day 8 · Source 10</p>
   <h1>Teach your Rust code to do a job.</h1>
-  <p class="lede">Create a function, give it typed inputs, and return a result you can use elsewhere in the program.</p>
+  <p class="lede">A function is a named job for your program. You’ll give one numbers to work with and get an answer back.</p>
   <div class="meta"><span>30–40 minutes</span><span>Type each step in Zed</span><span>Functions</span></div>
 
   <section class="card">
     <h2>Today’s idea</h2>
-    <p>A function gives a name to a reusable job. In Rust, <code>fn</code> starts a function definition, its parameters have explicit types, and <code>-&gt; Type</code> tells readers and the compiler what value it returns.</p>
-    <p>We will also meet the Rust distinction between a <strong>statement</strong> (performs an action but does not produce a value) and an <strong>expression</strong> (evaluates to a value). The last expression in a function can be its return value when it has no semicolon.</p>
+    <p>A function is a little set of instructions with a name. You can call it whenever you need that job done. In Rust, write <code>fn</code> to make a function. Put the input names and their types in parentheses. Use <code>-&gt; i32</code> when the function will give back an integer.</p>
+    <p>Today’s other idea is the difference between a <strong>statement</strong> and an <strong>expression</strong>. A statement does something, like make a variable. An expression works something out and has a value. In Rust, the last expression in a function gives back the function’s answer when you leave off the semicolon.</p>
     <p><strong>Course source:</strong> Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>.</p>
   </section>
 
   <section class="practice">
     <p class="eyebrow">Make your practice file</p>
     <h2>Create the Day 8 project</h2>
-    <p>In Zed’s integrated terminal, go to your course folder and create a small Cargo project:</p>
+    <p>In Zed’s terminal, move to the course’s <code>practice</code> folder. Then ask Cargo to make a project named <code>day-08-functions</code> and open it in Zed:</p>
     <pre><code>cd /home/siseng/Documents/08_Personal/programing_languages/Rust/notebooklm-rust-crash-course/practice
 cargo new day-08-functions
 zed day-08-functions</code></pre>
-    <p>If Zed opens a new window, open <code>src/main.rs</code>. Keep the integrated terminal available with <kbd>Ctrl</kbd> + <kbd>`</kbd>. After each step below, save with <kbd>Ctrl</kbd> + <kbd>S</kbd> and run <code>cargo run</code> from the project folder.</p>
+    <p>In Zed, open <code>src/main.rs</code>. That is the file where you’ll write Rust code. Keep the terminal open with <kbd>Ctrl</kbd> + <kbd>`</kbd>. After each step, save with <kbd>Ctrl</kbd> + <kbd>S</kbd>, then run <code>cargo run</code> in the project folder.</p>
   </section>
 
   <section class="card">
@@ -42,7 +42,13 @@ zed day-08-functions</code></pre>
 fn say_hello() {
     println!("Hello from my own function!");
 }</code></pre>
-    <p>Save and run <code>cargo run</code>. <code>main</code> is the program’s entry point. It calls <code>say_hello</code>; that call runs the body of the second function. Rust allows the function definition to appear below its call. Function names use <code>snake_case</code>, like Python.</p>
+    <p>Save and run <code>cargo run</code>. You should see the hello message. Rust starts your program at <code>main</code>. The line <code>say_hello();</code> tells it to run the instructions inside <code>say_hello</code>. Rust lets you write that function below <code>main</code>. Use lowercase words separated by underscores in function names, like <code>say_hello</code>; Python uses the same style.</p>
+  </section>
+
+  <section class="callout">
+    <h2>Why does <code>println!</code> go inside <code>main</code>?</h2>
+    <p><code>println!</code> is an instruction to do something: show text on the screen. Rust needs instructions like that inside a function so it knows when to run them. The program begins at <code>main</code>, so we put the print there—or inside another function that <code>main</code> calls.</p>
+    <p>Also, <code>total</code> only exists inside <code>main</code> because that is where we create it. A print that uses <code>total</code> has to stay there too.</p>
   </section>
 
   <section class="card">
@@ -56,8 +62,8 @@ fn say_hello() {
 fn show_practice_days(days: i32) {
     println!("You practised Rust for {days} days.");
 }</code></pre>
-    <p>Run it, then change <code>6</code> to another whole number and run again. <code>days: i32</code> means the parameter is named <code>days</code> and must be a 32-bit signed integer. Rust checks that the value at the call site has the right type.</p>
-    <p>Python’s comparable definition is <code>def show_practice_days(days):</code>. Rust makes the parameter type part of the function’s definition.</p>
+    <p>Run it, then change <code>6</code> to another number. <code>show_practice_days(6)</code> calls the function and gives it the number 6. Inside the function, that number is called <code>days</code>. The part <code>days: i32</code> tells Rust that <code>days</code> must be a whole number of this type.</p>
+    <p>In Python, you might write <code>def show_practice_days(days):</code>. Rust asks you to write the input’s type too, so it can catch a wrong kind of input before the program runs.</p>
   </section>
 
   <section class="card">
@@ -72,34 +78,36 @@ fn show_practice_days(days: i32) {
 fn add_numbers(left: i32, right: i32) -&gt; i32 {
     left + right
 }</code></pre>
-    <p>Run it. The output should be <code>Together: 23</code>. The arrow <code>-&gt; i32</code> declares the return type. The last line, <code>left + right</code>, is an expression; without a semicolon, its value becomes the function’s result.</p>
-    <p>Try adding a semicolon after <code>left + right</code> and run again. Rust will explain that the function body no longer produces the promised <code>i32</code>. Remove the semicolon to restore the return value.</p>
+    <p>Run it. You should see <code>Together: 23</code>. The function gets 16 and 7, adds them, and gives 23 back. The arrow <code>-&gt; i32</code> is its promise: “I will give back an integer.”</p>
+    <p>Python usually writes <code>return left + right</code>. Rust can do the same job with its last line: <code>left + right</code>. With no semicolon, that line’s answer becomes the function’s answer.</p>
+    <p>Try adding a semicolon after <code>left + right</code> and run again. The compiler will complain because the function promised an integer but now gives back no answer. Remove the semicolon to fix it.</p>
   </section>
 
   <section class="callout">
-    <h2>Statement or expression?</h2>
+    <h2>One line does something; another has an answer</h2>
     <div class="mapping" aria-label="Rust statements and expressions">
-      <div><small>Statement</small><strong><code>let count = 6;</code></strong>Creates a binding; it does not itself produce a value.</div>
-      <div><small>Expression</small><strong><code>count + 1</code></strong>Evaluates to a value—in this case, 7.</div>
-      <div><small>Expression used as the return value</small><strong><code>left + right</code></strong>At the end of the function, no semicolon means this value is returned.</div>
-      <div><small>Explicit early return</small><strong><code>return total;</code></strong>Leaves the function immediately with that value.</div>
+      <div><small>Statement: does a job</small><strong><code>let count = 6;</code></strong>Makes a variable called <code>count</code>. This line itself has no answer to hand back.</div>
+      <div><small>Expression: works out an answer</small><strong><code>count + 1</code></strong>Adds one to count. If count is 6, the answer is 7.</div>
+      <div><small>Last expression in a Rust function</small><strong><code>left + right</code></strong>Without a semicolon, this answer is also the function’s answer.</div>
+      <div><small>Return right now</small><strong><code>return total;</code></strong>Stops the function here and gives back <code>total</code>.</div>
     </div>
     <p>A block can contain statements and finish with an expression:</p>
     <pre><code>let next_week = {
     let this_week = 6;
     this_week + 1
 };</code></pre>
-    <p>Here, <code>let this_week = 6;</code> is a statement. The final <code>this_week + 1</code> is an expression, so <code>next_week</code> receives <code>7</code>. Adding a semicolon to that final line would make the block produce no number.</p>
+    <p>The first line makes a temporary variable called <code>this_week</code>. The last line adds one and gives the answer to <code>next_week</code>, so <code>next_week</code> becomes 7. That last line has no semicolon. Add one, and the block stops giving back the number.</p>
+    <p>Python comparison: <code>result = left + right</code> makes a variable, and <code>return result</code> sends its value back to the caller. In Rust, the last line <code>result</code> can send it back without writing <code>return</code>.</p>
   </section>
 
   <section class="card">
     <p class="eyebrow">Step 4 · add a decision inside a function</p>
-    <h2>Return early when a target is reached</h2>
-    <p>Replace the program with this version, which combines today’s functions with yesterday’s <code>if</code>:</p>
+    <h2>Stop early if the goal is reached</h2>
+    <p>Replace the program with this version. It puts yesterday’s <code>if</code> lesson inside a function:</p>
     <pre><code>fn main() {
     let total = add_numbers(16, 7);
     println!("Together: {total}");
-    println!("{}", days_until_goal(total, 30));
+    println!("Days left until 30: {}", days_until_goal(total, 30));
 }
 
 fn add_numbers(left: i32, right: i32) -&gt; i32 {
@@ -113,15 +121,16 @@ fn days_until_goal(current_days: i32, goal: i32) -&gt; i32 {
 
     goal - current_days
 }</code></pre>
-    <p>Run it. It should report <code>14</code> days until the goal. Change the call to <code>days_until_goal(30, 30)</code>: the function returns early with <code>0</code>. If the goal has not been reached, the final expression <code>goal - current_days</code> supplies the result.</p>
+    <p>Run it. You should see <code>Days left until 30: 7</code>. The function checks whether you have already reached the goal. If so, <code>return 0;</code> stops the function and gives back zero right away. Otherwise, the last line subtracts the current days from the goal and gives back the answer.</p>
+    <p>Try changing the call to <code>days_until_goal(30, 30)</code>. Now the goal is already reached, so the answer should be <code>0</code>.</p>
   </section>
 
   <section class="quiz">
     <p class="eyebrow">Retrieval check</p>
     <h2>Why does <code>left + right</code> have no semicolon in <code>add_numbers</code>?</h2>
-    <button type="button" data-answer="wrong">Rust requires the last line of every function to omit a semicolon.</button>
-    <button type="button" data-answer="correct">Without the semicolon, that expression’s value is returned as the function’s <code>i32</code>.</button>
-    <button type="button" data-answer="wrong">It is a special print command.</button>
+    <button type="button" data-answer="wrong">Rust never allows a semicolon at the end of a function.</button>
+    <button type="button" data-answer="correct">It lets the sum be the answer the function gives back.</button>
+    <button type="button" data-answer="wrong">It prints the sum on the screen.</button>
     <p class="feedback" aria-live="polite"></p>
   </section>
 
@@ -131,7 +140,7 @@ fn days_until_goal(current_days: i32, goal: i32) -&gt; i32 {
     <label><input type="checkbox"> I created the Cargo project and ran each version in Zed.</label>
     <label><input type="checkbox"> I changed the final expression to a statement with a semicolon and saw the compiler complain.</label>
     <label><input type="checkbox"> I tried the goal function with a goal already reached.</label>
-    <p><strong>Reply with:</strong> the output for <code>days_until_goal(30, 30)</code>, and your own explanation of what the missing semicolon does in <code>add_numbers</code>.</p>
+    <p><strong>Reply with:</strong> the output for <code>days_until_goal(30, 30)</code>, and one sentence: why does <code>left + right</code> have no semicolon at the end of <code>add_numbers</code>?</p>
   </section>
 
   <p class="footer">Course source: Tech With Tim’s <a href="https://www.youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ">Rust Programming Tutorial</a>.</p>
@@ -142,8 +151,8 @@ fn days_until_goal(current_days: i32, goal: i32) -&gt; i32 {
     button.addEventListener('click', () => {
       const correct = button.dataset.answer === 'correct';
       feedback.textContent = correct
-        ? 'Exactly. The final expression evaluates to an i32, which matches the function’s declared return type.'
-        : 'Look at the function signature: it promises an i32. The final expression must produce that value.';
+        ? 'That’s it. The sum is the function’s answer, and it matches the promised whole-number type.'
+        : 'Look at the promise after the arrow: this function must give back a whole number. Which line calculates that number?';
       feedback.className = `feedback ${correct ? 'correct' : 'incorrect'}`;
     });
   });
